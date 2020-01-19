@@ -2,33 +2,35 @@ package hadesSim;
 
 public class Battleship {
 
-	public int hullStrength;
-	public char weaponType;
-	public int weaponLvl;
-	public char shieldType;
-	public int shieldLevel;
-	public int weaponStrength;
-	public int maxLasStr;
+	int hullStrength;
+	char weaponType;
+	int weaponLvl;
+	char shieldType;
+	int shieldLevel;
+	int weaponStrength;
+	int maxLasStr;
 
 
 		public Battleship ( int bsLv, char weapon, int weaponLv, char shield, int shieldLv ) {
-			int[] bsHull = { 4200, 5000, 6000, 7500, 9000, 9500 };
-			hullStrength = bsHull[ bsLv - 1 ];
+			int[] bsHull = { 0, 4200, 5000, 6000, 7500, 9000, 9500 };
+			hullStrength = bsHull[ bsLv ];
 			weaponType = weapon;
 			weaponLvl = weaponLv;
 			shieldType = shield;
 			shieldLevel = shieldLv;
 		}
 		
-		static void setWeapon(Battleship thisShip) {
-			Weapons.selectWeapon(thisShip.weaponLvl, thisShip.weaponType);
-			thisShip.weaponStrength = Weapons.weaponStr;
-			thisShip.maxLasStr = Weapons.lasMax;
+		public void setWeapon(Battleship thisShip) {
+			
+			Peripherals a = new Peripherals();
+			thisShip.weaponStrength = a.setWeapon(thisShip.weaponType, thisShip.weaponLvl);
+			
 		}
 		
-		static void setShield(Battleship thisShip) {
-			Shield.setShield(thisShip.shieldType, thisShip.shieldLevel);
-			thisShip.hullStrength = thisShip.hullStrength + Shield.shieldStrength;
+		public void setShield(Battleship thisShip) {
+			
+			Peripherals a = new Peripherals();
+			thisShip.hullStrength = thisShip.hullStrength + a.setShield(thisShip.shieldType, thisShip.shieldLevel);
 		}
 
 }
