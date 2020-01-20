@@ -10,12 +10,18 @@ public class BattleSim {
 	static int bsOneWeaponLevel;
 	static char bsOneShieldType;
 	static int bsOneShieldLevel;
+	static double bsOneHealthMultiplier;
+	static double bsOneShieldMultiplier;
 	
 	static int bsTwoLv;
 	static char bsTwoWeaponType;
 	static int bsTwoWeaponLevel;
 	static char bsTwoShieldType;
 	static int bsTwoShieldLevel;
+	static double bsTwoHealthMultiplier;
+	static double bsTwoShieldMultiplier;
+	
+	static boolean rng;
 	
 	public BattleSim() {
 		
@@ -27,12 +33,21 @@ public class BattleSim {
 		Scanner in = new Scanner(System.in);
 		in.useDelimiter("\n");
 		System.out.println("  Weapons | Shields");
-		System.out.println(" Batt - b | Omega - b \n Las  - l | Passive - p \n");
+		System.out.println(" Batt - b | Omega - b \n Las  - l | Passive - p \n Mass - m | Delta - d \n          | Mirror - m");
 		System.out.println("ex: lv 4 bs with omega 4 and batt 5 vs lv 4 bs with delta 3 and laser 6 \n BS4:O4:B5,BS4:D3:L5");
 		String init = in.next();
 		init = init.replaceAll("\\s+","");
 		init = init.toUpperCase();
 		shipStats = init;
+		System.out.println("Want to randomize who attacks first? Y/N");
+		String randomizer = in.next();
+		randomizer = randomizer.toUpperCase();
+		
+		if(randomizer.contains("Y")) {
+			rng = true;
+		} else if(randomizer.contains("N")) {
+			rng = false;
+		}
 		
 		makeShips();
 		
@@ -44,25 +59,23 @@ public class BattleSim {
 		bs2.setWeapon(bs2);
 		bs2.setShield(bs2);
 		
-		System.out.println("bs1 stats: " + bs1.hullStrength + " " + bs1.weaponStrength);
-		System.out.println("bs2 stats: " + bs2.hullStrength + " " + bs2.weaponStrength);
+		System.out.println("bs1 stats: " + ((bs1.hullStrength * bsOneHealthMultiplier) + (bs1.shieldStrength * bsOneShieldMultiplier)) + " " + bs1.weaponStrength + " " + bs1.maxLasStr);
+		System.out.println("bs2 stats: " + ((bs2.hullStrength * bsTwoHealthMultiplier) + (bs2.shieldStrength * bsTwoShieldMultiplier)) +  " " + bs2.weaponStrength + " " + bs2.maxLasStr);
 		
 		BattleMath sim = new BattleMath(bs1, bs2);
+
+		sim.doMath();
 		
-		/*
-		if(bs1.weaponType == 'L') {
-			sim.battleMathLaser1();
-		}
-		*/
+		System.out.println(sim.determineWinner() + " " + sim.determineWinPct() + "% of the time!");
+		System.out.println("Side 1 attacks first " + sim.findNumHeads() + "/" + "1000 times!");
 		
-		sim.doMathAt100();
-		sim.doMathAt50();
 	}
 	
 	
 	static void makeShips() {
 		
 		// example input BS6:O5:L5,BS5:P3:B5
+		// second input BS6-95:D4:B10,BS4-50:P10:L7
 		
 		// Separates the two ships
 		String delim1 = ",";
@@ -75,8 +88,18 @@ public class BattleSim {
 		String[] ship1 = s1.split(delim2);
 		
 		String bs1 = ship1[0];
-		String lv = bs1.substring(2);
+		String lv = bs1.substring(2,3);
 		int bsLevel = Integer.parseInt(lv);
+		
+		double bsHealth = 0;
+		String bsHP = "100";
+		
+		if(bs1.contains("-") == false) {
+			bsHealth = 100;
+		} else if(bs1.contains("-")) {
+			bsHP = bs1.substring((bs1.indexOf('-') + 1), bs1.length());
+		}
+		bsHealth = Integer.parseInt(bsHP) / 100.0;
 		
 		String shield1 = ship1[1];
 		char shieldType = shield1.charAt(0);
@@ -92,6 +115,16 @@ public class BattleSim {
 			String shieldLv = shield1.substring(1,3);
 			shieldLevel = Integer.parseInt(shieldLv);
 		}
+		
+		double shieldHealth = 0;
+		String shieldHP = "100";
+		
+		if(shield1.contains("-") == false) {
+			shieldHealth = 100;
+		} else if(shield1.contains("-")) {
+			shieldHP = shield1.substring((shield1.indexOf('-') + 1), shield1.length());
+		}
+		shieldHealth = Integer.parseInt(shieldHP) / 100.0;
 		
 		String weapon1 = ship1[2];
 		char weaponType = weapon1.charAt(0);
@@ -111,6 +144,8 @@ public class BattleSim {
 		bsOneShieldLevel = shieldLevel;
 		bsOneWeaponType = weaponType;
 		bsOneWeaponLevel = weaponLevel;
+		bsOneHealthMultiplier = bsHealth;
+		bsOneShieldMultiplier = shieldHealth;
 		
 		
 		
@@ -120,6 +155,16 @@ public class BattleSim {
 		String bs2 = ship2[0];
 		String lv2 = bs2.substring(2);
 		int bsLevel2 = Integer.parseInt(lv2);
+		
+		double bs2Health = 0;
+		String bs2HP = "100";
+		
+		if(bs2.contains("-") == false) {
+			bs2Health = 100;
+		} else if(bs2.contains("-")) {
+			bs2HP = bs2.substring((bs2.indexOf('-') + 1), bs2.length());
+		}
+		bs2Health = Integer.parseInt(bs2HP) / 100.0;
 		
 		String shield2 = ship2[1];
 		char shieldType2 = shield2.charAt(0);
@@ -135,6 +180,16 @@ public class BattleSim {
 			String shieldLv2 = shield2.substring(1,3);
 			shieldLevel2 = Integer.parseInt(shieldLv2);
 		}
+		
+		double shield2Health = 0;
+		String shield2HP = "100";
+		
+		if(shield2.contains("-") == false) {
+			shield2Health = 100;
+		} else if(shield2.contains("-")) {
+			shield2HP = shield2.substring((shield2.indexOf('-') + 1), shield2.length());
+		}
+		shield2Health = Integer.parseInt(shield2HP) / 100.0;
 		
 		String weapon2 = ship2[2];
 		char weaponType2 = weapon2.charAt(0);
@@ -154,6 +209,8 @@ public class BattleSim {
 		bsTwoShieldLevel = shieldLevel2;
 		bsTwoWeaponType = weaponType2;
 		bsTwoWeaponLevel = weaponLevel2;
+		bsTwoHealthMultiplier = bs2Health;
+		bsTwoShieldMultiplier = shield2Health;
 		
 		
 	}

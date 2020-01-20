@@ -2,43 +2,26 @@ package hadesSim;
 
 public class Peripherals {
 	
-	private int shieldStrength;
-	private int weaponStrength;
+	int shieldStrength;
+	int weaponStrength;
+	int maxLaserStrength;
+	double mirrorReflect;
 	
 	public Peripherals() {
 		
 	}
 	
 	public int setShield(char shieldType, int shieldLevel) {
-		
-		switch(shieldType) {
-		
-			case 'O':
-				shieldType(shieldType, shieldLevel);
-				break;
-				
-			case 'P':
-				shieldType(shieldType, shieldLevel);
-				break;
-		
-		}
-		
+
+		shieldType(shieldType, shieldLevel);
 		
 		return shieldStrength;
 	}
 	
-	public int setWeapon(char weaponType, int weaponLevel) {
+	public void setWeapon(char weaponType, int weaponLevel) {
 		
-		switch(weaponType) {
-		
-			case 'B':
-				weaponType(weaponType, weaponLevel);
-			
-			case 'L':
-				weaponType(weaponType, weaponLevel);
-		}
-		
-		return weaponStrength;
+		weaponType(weaponType, weaponLevel);
+				
 	}
 	
 	private void shieldType(char shield, int shieldLevel) {
@@ -60,6 +43,25 @@ public class Peripherals {
 				
 				shieldStrength = passiveStrength[shieldLevel];
 			break;
+			
+			case 'D':
+				
+				int[] deltaStrength = { 0, 3500, 3800, 4100, 4400, 4700, 5000, 
+										5300, 5600, 5900, 6200, 6500, 6800 };
+				
+				shieldStrength = deltaStrength[shieldLevel];
+			break;
+			
+			case 'M':
+				
+				int[] mirrorStrength = { 0, 6500, 7000, 7500, 8000, 8500, 9000, 
+										10000, 11500, 13000, 14500, 16000, 18000 };
+				
+				double[] reflectDamage = { 0, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24, 
+										   0.26, 0.28, 0.30, 0.32, 0.34, 0.36 };
+				
+				shieldStrength = mirrorStrength[shieldLevel];
+				mirrorReflect = reflectDamage[shieldLevel];
 		}
 		
 		
@@ -71,19 +73,32 @@ public class Peripherals {
 		
 			case 'B':
 		
-				int[] battStr = { 0, 100, 120, 140, 160, 180, 
-								  210, 250, 285, 315, 340, 365, 390 };
+				int[] battStr = { 0, 100, 120, 140, 160, 180, 210, 
+								  250, 285, 315, 340, 365, 390 };
 			
 				weaponStrength = battStr[weaponLevel];
 			break;
 		
 			case 'L':
 		
-				int[] lasStr = { 0, 80, 200, 90, 240, 100, 280, 120, 325, 140, 360, 160, 400, 180, 
-						         500, 200, 600, 225, 700, 250, 800, 275, 900, 300, 1000 };
+				int[] lasStr = { 0, 80, 90, 100, 120, 140, 160, 
+								180, 200, 225, 250, 275, 300 };
+				
+				int[] lasMax = { 0, 200, 240, 280, 325, 360, 400, 
+								500, 600, 700, 800, 900, 1000 }; 
 		
 				weaponStrength = lasStr[weaponLevel];
+				maxLaserStrength = lasMax[weaponLevel];
+				
 			break;
+			
+			case 'M':
+				
+				int[] massStr = { 0, 60, 75, 90, 110, 120, 140, 
+								  160, 180, 210, 240, 270, 300 };
+				
+				weaponStrength = massStr[weaponLevel];
+				
 			}
 		}	
 

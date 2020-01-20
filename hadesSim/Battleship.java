@@ -3,12 +3,14 @@ package hadesSim;
 public class Battleship {
 
 	int hullStrength;
+	int shieldStrength;
 	char weaponType;
 	int weaponLvl;
 	char shieldType;
 	int shieldLevel;
 	int weaponStrength;
 	int maxLasStr;
+	double reflectDamage;
 
 
 		public Battleship ( int bsLv, char weapon, int weaponLv, char shield, int shieldLv ) {
@@ -23,14 +25,21 @@ public class Battleship {
 		public void setWeapon(Battleship thisShip) {
 			
 			Peripherals a = new Peripherals();
-			thisShip.weaponStrength = a.setWeapon(thisShip.weaponType, thisShip.weaponLvl);
+			a.setWeapon(thisShip.weaponType, thisShip.weaponLvl);
+			thisShip.weaponStrength = a.weaponStrength;
+			thisShip.maxLasStr = a.maxLaserStrength;
 			
 		}
 		
 		public void setShield(Battleship thisShip) {
 			
 			Peripherals a = new Peripherals();
-			thisShip.hullStrength = thisShip.hullStrength + a.setShield(thisShip.shieldType, thisShip.shieldLevel);
+			thisShip.shieldStrength = a.setShield(thisShip.shieldType, thisShip.shieldLevel);
+			
+			if(thisShip.shieldType == 'M') {
+				thisShip.reflectDamage = a.mirrorReflect;
+			}
+			
 		}
 
 }
