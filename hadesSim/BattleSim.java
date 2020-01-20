@@ -77,7 +77,7 @@ public class BattleSim {
 		// second input BS6-95:D4:B10,BS4-50:P10:L7
 		
 		// Separates the two ships
-		String delim1 = ",";
+		String delim1 = "V";
 		String[] a = shipStats.split(delim1);
 		String s1 = a[0];
 		String s2 = a[1];
@@ -93,10 +93,10 @@ public class BattleSim {
 		double bsHealth = 0;
 		String bsHP = "100";
 		
-		if(bs1.contains("-") == false) {
+		if(bs1.contains("@") == false) {
 			bsHealth = 100;
-		} else if(bs1.contains("-")) {
-			bsHP = bs1.substring((bs1.indexOf('-') + 1), bs1.length());
+		} else if(bs1.contains("@")) {
+			bsHP = bs1.substring((bs1.indexOf('@') + 1), bs1.length());
 		}
 		bsHealth = Integer.parseInt(bsHP) / 100.0;
 		
@@ -118,10 +118,10 @@ public class BattleSim {
 		double shieldHealth = 0;
 		String shieldHP = "100";
 		
-		if(shield1.contains("-") == false) {
+		if(shield1.contains("@") == false) {
 			shieldHealth = 100;
-		} else if(shield1.contains("-")) {
-			shieldHP = shield1.substring((shield1.indexOf('-') + 1), shield1.length());
+		} else if(shield1.contains("@")) {
+			shieldHP = shield1.substring((shield1.indexOf('@') + 1), shield1.length());
 		}
 		shieldHealth = Integer.parseInt(shieldHP) / 100.0;
 		
@@ -152,16 +152,16 @@ public class BattleSim {
 		String[] ship2 = s2.split(delim2);
 		
 		String bs2 = ship2[0];
-		String lv2 = bs2.substring(2);
+		String lv2 = bs2.substring(2,3);
 		int bsLevel2 = Integer.parseInt(lv2);
 		
 		double bs2Health = 0;
 		String bs2HP = "100";
 		
-		if(bs2.contains("-") == false) {
+		if(bs2.contains("@") == false) {
 			bs2Health = 100;
-		} else if(bs2.contains("-")) {
-			bs2HP = bs2.substring((bs2.indexOf('-') + 1), bs2.length());
+		} else if(bs2.contains("@")) {
+			bs2HP = bs2.substring((bs2.indexOf('@') + 1), bs2.length());
 		}
 		bs2Health = Integer.parseInt(bs2HP) / 100.0;
 		
@@ -183,10 +183,10 @@ public class BattleSim {
 		double shield2Health = 0;
 		String shield2HP = "100";
 		
-		if(shield2.contains("-") == false) {
+		if(shield2.contains("@") == false) {
 			shield2Health = 100;
-		} else if(shield2.contains("-")) {
-			shield2HP = shield2.substring((shield2.indexOf('-') + 1), shield2.length());
+		} else if(shield2.contains("@")) {
+			shield2HP = shield2.substring((shield2.indexOf('@') + 1), shield2.length());
 		}
 		shield2Health = Integer.parseInt(shield2HP) / 100.0;
 		
