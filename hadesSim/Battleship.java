@@ -2,15 +2,15 @@ package hadesSim;
 
 public class Battleship {
 
-	int hullStrength;
-	int shieldStrength;
-	char weaponType;
-	int weaponLvl;
-	char shieldType;
-	int shieldLevel;
-	int weaponStrength;
-	int maxLasStr;
-	double reflectDamage;
+	private int hullStrength;
+	private int shieldStrength;
+	private char weaponType;
+	private int weaponLvl;
+	private char shieldType;
+	private int shieldLevel;
+	private int weaponStrength;
+	private int maxLasStr;
+	private double reflectDamage;
 
 
 		public Battleship ( int bsLv, char weapon, int weaponLv, char shield, int shieldLv ) {
@@ -26,19 +26,62 @@ public class Battleship {
 			
 			Peripherals a = new Peripherals();
 			a.setWeapon(thisShip.weaponType, thisShip.weaponLvl);
-			thisShip.weaponStrength = a.weaponStrength;
-			thisShip.maxLasStr = a.maxLaserStrength;
+			thisShip.weaponStrength = a.getWeaponStr();
+			thisShip.maxLasStr = a.getMaxLaser();
 			
 		}
 		
 		public void setShield(Battleship thisShip) {
 			
 			Peripherals a = new Peripherals();
-			thisShip.shieldStrength = a.setShield(thisShip.shieldType, thisShip.shieldLevel);
+			a.setShield(thisShip.shieldType, thisShip.shieldLevel);
+			thisShip.shieldStrength = a.getShieldStr();
 			
 			if(thisShip.shieldType == 'M') {
-				thisShip.reflectDamage = a.mirrorReflect;
+				thisShip.reflectDamage = a.getMirror();
 			}
+			
+		}
+		
+		public char getWeaponType() {
+			
+			return weaponType;
+			
+		}
+		
+		public char getShieldType() {
+			
+			return shieldType;
+			
+		}
+		
+		public int getHull() {
+			
+			return hullStrength;
+			
+		}
+		
+		public int getShield() {
+			
+			return shieldStrength;
+			
+		}
+		
+		public int getWeapon() {
+			
+			return weaponStrength;
+			
+		}
+		
+		public int getMaxLaser() {
+			
+			return maxLasStr;
+			
+		}
+		
+		public double getReflectDamage() {
+			
+			return reflectDamage;
 			
 		}
 

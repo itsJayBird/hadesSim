@@ -25,22 +25,22 @@ public class BattleMath {
 	}
 
 	public BattleMath(Battleship firstShip, Battleship secondShip) {
-		bsOneHullStr = (firstShip.hullStrength * BattleSim.bsOneHealthMultiplier) + 
-						(firstShip.shieldStrength * BattleSim.bsOneShieldMultiplier);
-		bsOneWeaponStr = firstShip.weaponStrength;
-		bsOneLas = firstShip.weaponType;
-		bsOneLaserMax = firstShip.maxLasStr;;
-		bsOneShield = firstShip.shieldType;
-		bsOneMirror = firstShip.reflectDamage;
+		bsOneHullStr = (firstShip.getHull() * BattleSim.bsOneHealthMultiplier) + 
+						(firstShip.getShield() * BattleSim.bsOneShieldMultiplier);
+		bsOneWeaponStr = firstShip.getWeapon();
+		bsOneLas = firstShip.getWeaponType();
+		bsOneLaserMax = firstShip.getMaxLaser();
+		bsOneShield = firstShip.getShieldType();
+		bsOneMirror = firstShip.getReflectDamage();
 		
 		
-		bsTwoHullStr = (secondShip.hullStrength * BattleSim.bsTwoHealthMultiplier) +
-						(secondShip.shieldStrength * BattleSim.bsTwoShieldMultiplier);
-		bsTwoWeaponStr = secondShip.weaponStrength;
-		bsTwoLas = secondShip.weaponType;
-		bsTwoLaserMax = secondShip.maxLasStr;
-		bsTwoShield = secondShip.shieldType;
-		bsTwoMirror = secondShip.reflectDamage;
+		bsTwoHullStr = (secondShip.getHull() * BattleSim.bsTwoHealthMultiplier) +
+						(secondShip.getShield() * BattleSim.bsTwoShieldMultiplier);
+		bsTwoWeaponStr = secondShip.getWeapon();
+		bsTwoLas = secondShip.getWeaponType();
+		bsTwoLaserMax = secondShip.getMaxLaser();
+		bsTwoShield = secondShip.getShieldType();
+		bsTwoMirror = secondShip.getReflectDamage();
 	}
 	
 	public void doMath() {

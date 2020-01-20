@@ -2,20 +2,19 @@ package hadesSim;
 
 public class Peripherals {
 	
-	int shieldStrength;
-	int weaponStrength;
-	int maxLaserStrength;
-	double mirrorReflect;
+	private int shieldStrength;
+	private int weaponStrength;
+	private int maxLaserStrength;
+	private double mirrorReflect;
 	
 	public Peripherals() {
 		
 	}
 	
-	public int setShield(char shieldType, int shieldLevel) {
+	public void setShield(char shieldType, int shieldLevel) {
 
 		shieldType(shieldType, shieldLevel);
 		
-		return shieldStrength;
 	}
 	
 	public void setWeapon(char weaponType, int weaponLevel) {
@@ -102,4 +101,27 @@ public class Peripherals {
 			}
 		}	
 
+	public int getShieldStr() {
+		
+		return shieldStrength;
+		
+	}
+	
+	public int getWeaponStr() {
+		
+		return weaponStrength;
+		
+	}
+	
+	public int getMaxLaser() {
+		
+		return maxLaserStrength;
+		
+	}
+	
+	public double getMirror() {
+		
+		return mirrorReflect;
+		
+	}
 }

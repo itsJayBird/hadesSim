@@ -59,8 +59,8 @@ public class BattleSim {
 		bs2.setWeapon(bs2);
 		bs2.setShield(bs2);
 		
-		System.out.println("bs1 stats: " + ((bs1.hullStrength * bsOneHealthMultiplier) + (bs1.shieldStrength * bsOneShieldMultiplier)) + " " + bs1.weaponStrength + " " + bs1.maxLasStr);
-		System.out.println("bs2 stats: " + ((bs2.hullStrength * bsTwoHealthMultiplier) + (bs2.shieldStrength * bsTwoShieldMultiplier)) +  " " + bs2.weaponStrength + " " + bs2.maxLasStr);
+		System.out.println("bs1 stats: " + ((bs1.getHull() * bsOneHealthMultiplier) + (bs1.getShield() * bsOneShieldMultiplier)) + " " + bs1.getWeapon() + " " + bs1.getMaxLaser());
+		System.out.println("bs2 stats: " + ((bs2.getHull() * bsTwoHealthMultiplier) + (bs2.getShield() * bsTwoShieldMultiplier)) +  " " + bs2.getWeapon() + " " + bs2.getMaxLaser());
 		
 		BattleMath sim = new BattleMath(bs1, bs2);
 
@@ -70,7 +70,6 @@ public class BattleSim {
 		System.out.println("Side 1 attacks first " + sim.findNumHeads() + "/" + "1000 times!");
 		
 	}
-	
 	
 	static void makeShips() {
 		
@@ -217,4 +216,3 @@ public class BattleSim {
 
 	
 }
-
