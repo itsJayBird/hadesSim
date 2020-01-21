@@ -4,16 +4,16 @@ public class Battleship {
 
 	private int hullStrength;
 	private int shieldStrength;
-	private char weaponType;
+	private String weaponType;
 	private int weaponLvl;
-	private char shieldType;
+	private String shieldType;
 	private int shieldLevel;
 	private int weaponStrength;
 	private int maxLasStr;
 	private double reflectDamage;
 
 
-		public Battleship ( int bsLv, char weapon, int weaponLv, char shield, int shieldLv ) {
+		public Battleship ( int bsLv, String weapon, int weaponLv, String shield, int shieldLv ) {
 			int[] bsHull = { 0, 4200, 5000, 6000, 7500, 9000, 9500 };
 			hullStrength = bsHull[ bsLv ];
 			weaponType = weapon;
@@ -37,19 +37,19 @@ public class Battleship {
 			a.setShield(thisShip.shieldType, thisShip.shieldLevel);
 			thisShip.shieldStrength = a.getShieldStr();
 			
-			if(thisShip.shieldType == 'M') {
+			if(thisShip.shieldType == "MIR") {
 				thisShip.reflectDamage = a.getMirror();
 			}
 			
 		}
 		
-		public char getWeaponType() {
+		public String getWeaponType() {
 			
 			return weaponType;
 			
 		}
 		
-		public char getShieldType() {
+		public String getShieldType() {
 			
 			return shieldType;
 			

@@ -6,17 +6,17 @@ public class BattleSim {
 	static String shipStats;
 	
 	static int bsOneLv;
-	static char bsOneWeaponType;
+	static String bsOneWeaponType;
 	static int bsOneWeaponLevel;
-	static char bsOneShieldType;
+	static String bsOneShieldType;
 	static int bsOneShieldLevel;
 	static double bsOneHealthMultiplier;
 	static double bsOneShieldMultiplier;
 	
 	static int bsTwoLv;
-	static char bsTwoWeaponType;
+	static String bsTwoWeaponType;
 	static int bsTwoWeaponLevel;
-	static char bsTwoShieldType;
+	static String bsTwoShieldType;
 	static int bsTwoShieldLevel;
 	static double bsTwoHealthMultiplier;
 	static double bsTwoShieldMultiplier;
@@ -32,9 +32,9 @@ public class BattleSim {
 		
 		Scanner in = new Scanner(System.in);
 		in.useDelimiter("\n");
-		System.out.println("  Weapons | Shields");
-		System.out.println(" Batt - b | Omega - b \n Las  - l | Passive - p \n Mass - m | Delta - d \n          | Mirror - m");
-		System.out.println("ex: lv 4 bs with omega 4 and batt 5 vs lv 4 bs with delta 3 and laser 6 \n BS4:O4:B5,BS4:D3:L5");
+		System.out.println("  Weapons   |   Shields");
+		System.out.println(" Batt - bat | Omega   - omg \n Las  - las | Passive - pas \n Mass - mas | Delta   - dlt \n            | Mirror  - mir");
+		System.out.println("ex: lv 4 bs with omega 4 and batt 5 vs lv 4 bs with delta 3 and laser 6 \n BS4:OMG4:BAT5,BS4:DLT3:LAS5");
 		String init = in.next();
 		init = init.replaceAll("\\s+","");
 		init = init.toUpperCase();
@@ -59,8 +59,8 @@ public class BattleSim {
 		bs2.setWeapon(bs2);
 		bs2.setShield(bs2);
 		
-		System.out.println("bs1 stats: " + ((bs1.getHull() * bsOneHealthMultiplier) + (bs1.getShield() * bsOneShieldMultiplier)) + " " + bs1.getWeapon() + " " + bs1.getMaxLaser());
-		System.out.println("bs2 stats: " + ((bs2.getHull() * bsTwoHealthMultiplier) + (bs2.getShield() * bsTwoShieldMultiplier)) +  " " + bs2.getWeapon() + " " + bs2.getMaxLaser());
+		//System.out.println("bs1 stats: " + ((bs1.getHull() * bsOneHealthMultiplier) + (bs1.getShield() * bsOneShieldMultiplier)) + " " + bs1.getWeapon() + " " + bs1.getMaxLaser());
+		//System.out.println("bs2 stats: " + ((bs2.getHull() * bsTwoHealthMultiplier) + (bs2.getShield() * bsTwoShieldMultiplier)) +  " " + bs2.getWeapon() + " " + bs2.getMaxLaser());
 		
 		BattleMath sim = new BattleMath(bs1, bs2);
 
@@ -101,17 +101,17 @@ public class BattleSim {
 		bsHealth = Integer.parseInt(bsHP) / 100.0;
 		
 		String shield1 = ship1[1];
-		char shieldType = shield1.charAt(0);
+		String shieldType = shield1.substring(0,3);
 		int shieldLevel = 1;
 		int weaponLevel = 1;
 		
-		if(shield1.length() == 2) {
-			String shlv = shield1.substring(1);
+		if(shield1.length() == 4) {
+			String shlv = shield1.substring(3,4);
 			shieldLevel = Integer.parseInt(shlv);
 		}
 		
-		if(shield1.length() == 3) {
-			String shieldLv = shield1.substring(1,3);
+		if(shield1.length() == 5) {
+			String shieldLv = shield1.substring(3,5);
 			shieldLevel = Integer.parseInt(shieldLv);
 		}
 		
@@ -126,15 +126,15 @@ public class BattleSim {
 		shieldHealth = Integer.parseInt(shieldHP) / 100.0;
 		
 		String weapon1 = ship1[2];
-		char weaponType = weapon1.charAt(0);
+		String weaponType = weapon1.substring(0,3);
 		
-		if(weapon1.length() == 2) {
-			String wlv = weapon1.substring(1);
+		if(weapon1.length() == 4) {
+			String wlv = weapon1.substring(3,4);
 			weaponLevel = Integer.parseInt(wlv);
 		}
 		
-		if(weapon1.length() == 3) {
-			String weaponLv = weapon1.substring(1, 3);
+		if(weapon1.length() == 5) {
+			String weaponLv = weapon1.substring(4,5);
 			weaponLevel = Integer.parseInt(weaponLv);
 		}
 		
@@ -166,17 +166,17 @@ public class BattleSim {
 		bs2Health = Integer.parseInt(bs2HP) / 100.0;
 		
 		String shield2 = ship2[1];
-		char shieldType2 = shield2.charAt(0);
+		String shieldType2 = shield2.substring(0,3);
 		int shieldLevel2 = 1;
 		int weaponLevel2 = 1;
 		
-		if(shield2.length() == 2) {
-			String shlv2 = shield2.substring(1);
+		if(shield2.length() == 4) {
+			String shlv2 = shield2.substring(3,4);
 			shieldLevel2 = Integer.parseInt(shlv2);
 		}
 		
-		if(shield2.length() == 3) {
-			String shieldLv2 = shield2.substring(1,3);
+		if(shield2.length() == 5) {
+			String shieldLv2 = shield2.substring(3,5);
 			shieldLevel2 = Integer.parseInt(shieldLv2);
 		}
 		
@@ -191,15 +191,15 @@ public class BattleSim {
 		shield2Health = Integer.parseInt(shield2HP) / 100.0;
 		
 		String weapon2 = ship2[2];
-		char weaponType2 = weapon2.charAt(0);
+		String weaponType2 = weapon2.substring(0,3);
 		
-		if(weapon2.length() == 2) {
-			String wlv2 = weapon2.substring(1);
+		if(weapon2.length() == 4) {
+			String wlv2 = weapon2.substring(3,4);
 			weaponLevel2 = Integer.parseInt(wlv2);
 		}
 		
-		if(weapon2.length() == 3) {
-			String weaponLv2 = weapon2.substring(1, 3);
+		if(weapon2.length() == 5) {
+			String weaponLv2 = weapon2.substring(3,5);
 			weaponLevel2 = Integer.parseInt(weaponLv2);
 		}
 		

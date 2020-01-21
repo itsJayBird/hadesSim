@@ -11,23 +11,23 @@ public class Peripherals {
 		
 	}
 	
-	public void setShield(char shieldType, int shieldLevel) {
+	public void setShield(String shieldType, int shieldLevel) {
 
 		shieldType(shieldType, shieldLevel);
 		
 	}
 	
-	public void setWeapon(char weaponType, int weaponLevel) {
+	public void setWeapon(String weaponType, int weaponLevel) {
 		
 		weaponType(weaponType, weaponLevel);
 				
 	}
 	
-	private void shieldType(char shield, int shieldLevel) {
+	private void shieldType(String shield, int shieldLevel) {
 		
 		switch(shield) {
 		
-			case 'O':
+			case "OMG":
 				
 				int[] omegaStrength = { 0, 8000, 9000, 10000, 11000, 12000, 13000, 
 										14000, 15500, 17000, 18500, 20000, 21500 };
@@ -35,7 +35,7 @@ public class Peripherals {
 				shieldStrength = omegaStrength[shieldLevel];
 			break;
 			
-			case 'P':
+			case "PAS":
 				
 				int[] passiveStrength = { 0, 5000, 6000, 7000, 8000, 9000, 10000, 
 										  11500, 13000, 14500, 16000, 17500, 1900 };
@@ -43,7 +43,7 @@ public class Peripherals {
 				shieldStrength = passiveStrength[shieldLevel];
 			break;
 			
-			case 'D':
+			case "DLT":
 				
 				int[] deltaStrength = { 0, 3500, 3800, 4100, 4400, 4700, 5000, 
 										5300, 5600, 5900, 6200, 6500, 6800 };
@@ -51,7 +51,7 @@ public class Peripherals {
 				shieldStrength = deltaStrength[shieldLevel];
 			break;
 			
-			case 'M':
+			case "MIR":
 				
 				int[] mirrorStrength = { 0, 6500, 7000, 7500, 8000, 8500, 9000, 
 										10000, 11500, 13000, 14500, 16000, 18000 };
@@ -66,11 +66,11 @@ public class Peripherals {
 		
 	}
 	
-	private void weaponType(char weapon, int weaponLevel) {
+	private void weaponType(String weapon, int weaponLevel) {
 		
 		switch(weapon) {
 		
-			case 'B':
+			case "BAT":
 		
 				int[] battStr = { 0, 100, 120, 140, 160, 180, 210, 
 								  250, 285, 315, 340, 365, 390 };
@@ -78,7 +78,7 @@ public class Peripherals {
 				weaponStrength = battStr[weaponLevel];
 			break;
 		
-			case 'L':
+			case "LAS":
 		
 				int[] lasStr = { 0, 80, 90, 100, 120, 140, 160, 
 								180, 200, 225, 250, 275, 300 };
@@ -91,7 +91,7 @@ public class Peripherals {
 				
 			break;
 			
-			case 'M':
+			case "MAS":
 				
 				int[] massStr = { 0, 60, 75, 90, 110, 120, 140, 
 								  160, 180, 210, 240, 270, 300 };
