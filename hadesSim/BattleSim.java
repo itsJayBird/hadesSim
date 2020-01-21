@@ -37,7 +37,7 @@ public class BattleSim {
 		do {
 			System.out.println("  Weapons   |   Shields");
 			System.out.println(" Batt - bat | Omega   - omg \n Las  - las | Passive - pas \n Mass - mas | Delta   - dlt \n            | Mirror  - mir");
-			System.out.println("ex: lv 4 bs with omega 4 and batt 5 vs lv 4 bs with delta 3 and laser 6 \n BS4:OMG4:BAT5,BS4:DLT3:LAS5");
+			System.out.println("ex: lv 4 bs with omega 4 and batt 5 vs lv 4 bs with delta 3 and laser 6 \n BS4:OMG4:BAT5 V BS4:DLT3:LAS5");
 			String init = in.next();
 			init = init.replaceAll("\\s+","");
 			init = init.toUpperCase();
