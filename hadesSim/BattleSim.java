@@ -3,71 +3,36 @@ import java.util.Scanner;
 
 public class BattleSim {
 
-	static String shipStats;
+	private String shipStats;
 	
-	static int bsOneLv;
-	static String bsOneWeaponType;
-	static int bsOneWeaponLevel;
-	static String bsOneShieldType;
-	static int bsOneShieldLevel;
-	static double bsOneHealthMultiplier;
+	private Battleship ship1;
+	private Battleship ship2;
+	
+	private int bsOneLv;
+	private String bsOneWeaponType;
+	private int bsOneWeaponLevel;
+	private String bsOneShieldType;
+	private int bsOneShieldLevel;
+	private double bsOneHealthMultiplier;
 	static double bsOneShieldMultiplier;
 	
-	static int bsTwoLv;
-	static String bsTwoWeaponType;
-	static int bsTwoWeaponLevel;
-	static String bsTwoShieldType;
-	static int bsTwoShieldLevel;
-	static double bsTwoHealthMultiplier;
-	static double bsTwoShieldMultiplier;
+	private int bsTwoLv;
+	private String bsTwoWeaponType;
+	private int bsTwoWeaponLevel;
+	private String bsTwoShieldType;
+	private int bsTwoShieldLevel;
+	private double bsTwoHealthMultiplier;
+	private double bsTwoShieldMultiplier;
 	
-	static boolean rng;
+	private boolean rng;
 	
 	public BattleSim() {
 		
 	}
 	
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		
-		Scanner in = new Scanner(System.in);
-		in.useDelimiter("\n");
-		boolean incorrectInput = false;
 		
-		System.out.println("  Weapons   |   Shields");
-		System.out.println(" Batt - bat | Omega   - omg \n Las  - las | Passive - pas \n Mass - mas | Delta   - dlt \n            | Mirror  - mir");
-		System.out.println("ex: lv 4 bs with omega 4 and batt 5 vs lv 4 bs with delta 3 and laser 6 \n BS4:OMG4:BAT5,BS4:DLT3:LAS5");
-		
-		
-		do {
-			
-			String init = in.next();
-			init = init.replaceAll("\\s+","");
-			init = init.toUpperCase();
-			shipStats = init;
-		
-			try {
-				makeShips();
-				@SuppressWarnings("unused")
-				Battleship bs1 = new Battleship(bsOneLv, bsOneWeaponType, bsOneWeaponLevel, bsOneShieldType, bsOneShieldLevel);
-				@SuppressWarnings("unused")
-				Battleship bs2 = new Battleship(bsTwoLv, bsTwoWeaponType, bsTwoWeaponLevel, bsTwoShieldType, bsTwoShieldLevel);
-			}
-			catch(Exception e) {
-				System.out.println("Incorrect input! Try again!");
-				incorrectInput = true;
-			}
-		}while(incorrectInput == true);
-		
-		System.out.println("Want to randomize who attacks first? Y/N");
-		String randomizer = in.next();
-		randomizer = randomizer.toUpperCase();
-		
-		if(randomizer.contains("Y")) {
-			rng = true;
-		} else if(randomizer.contains("N")) {
-			rng = false;
-		}
 		
 		makeShips();
 		
@@ -91,28 +56,96 @@ public class BattleSim {
 		
 	}
 	
+	@SuppressWarnings("resource")
+	private void takeUserInput() {
+		
+		Scanner in = new Scanner(System.in);
+		in.useDelimiter("\n");
+		boolean incorrectInput = false;
+		
+		System.out.println("  Weapons   |   Shields");
+		System.out.println(" Batt - bat | Omega   - omg \n Las  - las | Passive - pas \n Mass - mas | Delta   - dlt \n            | Mirror  - mir");
+		System.out.println("ex: lv 4 bs with omega 4 and batt 5 vs lv 4 bs with delta 3 and laser 6 \n BS4:OMG4:BAT5 V BS4:DLT3:LAS5");
+		
+		
+		do {
+			
+			String init = in.next();
+			init = init.replaceAll("\\s+","");
+			init = init.toUpperCase();
+			shipStats = init;
+		
+			try {
+				makeShips();
+				@SuppressWarnings("unused")
+				Battleship bs1 = new Battleship(bsOneLv, bsOneWeaponType, bsOneWeaponLevel, bsOneShieldType, bsOneShieldLevel);
+				@SuppressWarnings("unused")
+				Battleship bs2 = new Battleship(bsTwoLv, bsTwoWeaponType, bsTwoWeaponLevel, bsTwoShieldType, bsTwoShieldLevel);
+			}
+			catch(Exception e) {
+				System.out.println("Incorrect input! Try Again!");
+				incorrectInput = true;
+			}
+		}while(incorrectInput == true);
+		
+	}
+	
+	@SuppressWarnings("resource")
+	private void setRNG() {
+		
+		Scanner in = new Scanner(System.in);
+		
+		System.out.println("Want to randomize who attacks first? Y/N");
+		String randomizer = in.next();
+		randomizer = randomizer.toUpperCase();
+		
+		if(randomizer.contains("Y")) {
+			rng = true;
+		} else if(randomizer.contains("N")) {
+			rng = false;
+		}
+		
+	}
+	
 	static void makeShips() {
 		
-		// example input BS6:O5:L5,BS5:P3:B5
-		// second input BS6-95:D4:B10,BS4-50:P10:L7
+		BattleSim now = new BattleSim();
+		
+		// example input BS6:OMG5:LAS5VBS5:PAS3:BAT5
+		// second input BS6@95:DLT4:BAT10VBS4@50:PAS10:LAS7
 		
 		// Separates the two ships
 		String delim1 = "V";
-		String[] a = shipStats.split(delim1);
+		String[] a = now.shipStats.split(delim1);
 		String s1 = a[0];
 		String s2 = a[1];
 		
-		// determining first ships attributes
+		// determining first ships attributes 
+		//start by separating each attribute
 		String delim2 = ":";
 		String[] ship1 = s1.split(delim2);
 		
+		// first chunk of input ex. BS6 OR BS6@50
 		String bs1 = ship1[0];
 		String lv = bs1.substring(2,3);
 		int bsLevel = Integer.parseInt(lv);
-		
 		double bsHealth = 0;
 		String bsHP = "100";
 		
+		// building shield string ex. OMG5 OR OMG10, substring pulls first 3 to assign type
+		String shield1 = ship1[1];
+		String shieldType = shield1.substring(0,3);
+		int shieldLevel = 1;
+		int weaponLevel = 1;
+		double shieldHealth = 0;
+		String shieldHP = "100";
+		
+		// building weapon string ex. BAT5 OR BAT10, substring pulls first 3 to assign type
+		String weapon1 = ship1[2];
+		String weaponType = weapon1.substring(0,3);
+		
+		// if input ex. BS6 without a health modifier, use first bit to set hp to 100%
+		// if input ex. BS6@50 pulls the numbers after @ symbol to determine %hp
 		if(bs1.contains("@") == false) {
 			bsHealth = 100;
 		} else if(bs1.contains("@")) {
@@ -120,11 +153,8 @@ public class BattleSim {
 		}
 		bsHealth = Integer.parseInt(bsHP) / 100.0;
 		
-		String shield1 = ship1[1];
-		String shieldType = shield1.substring(0,3);
-		int shieldLevel = 1;
-		int weaponLevel = 1;
-		
+		// if input ex. OMG4 uses first bit of code to take level
+		// if input ex. OMG10 uses second bit to take the level
 		if(shield1.length() == 4) {
 			String shlv = shield1.substring(3,4);
 			shieldLevel = Integer.parseInt(shlv);
@@ -135,9 +165,8 @@ public class BattleSim {
 			shieldLevel = Integer.parseInt(shieldLv);
 		}
 		
-		double shieldHealth = 0;
-		String shieldHP = "100";
-		
+		// same as with hp, if no @ assums 100% hp on shield
+		// if @ pulls the number after to set hp multiplier
 		if(shield1.contains("@") == false) {
 			shieldHealth = 100;
 		} else if(shield1.contains("@")) {
@@ -145,9 +174,8 @@ public class BattleSim {
 		}
 		shieldHealth = Integer.parseInt(shieldHP) / 100.0;
 		
-		String weapon1 = ship1[2];
-		String weaponType = weapon1.substring(0,3);
-		
+		// if input ex. BAT5 uses first bit to pull the level
+		// if input ex. BAT10 uses second bit to pull level ------------stopped editing here
 		if(weapon1.length() == 4) {
 			String wlv = weapon1.substring(3,4);
 			weaponLevel = Integer.parseInt(wlv);
@@ -156,16 +184,7 @@ public class BattleSim {
 		if(weapon1.length() == 5) {
 			String weaponLv = weapon1.substring(4,5);
 			weaponLevel = Integer.parseInt(weaponLv);
-		}
-		
-		bsOneLv = bsLevel;
-		bsOneShieldType = shieldType;
-		bsOneShieldLevel = shieldLevel;
-		bsOneWeaponType = weaponType;
-		bsOneWeaponLevel = weaponLevel;
-		bsOneHealthMultiplier = bsHealth;
-		bsOneShieldMultiplier = shieldHealth;
-		
+		}	
 		
 		
 		// determine ship 2 attributes
@@ -223,13 +242,21 @@ public class BattleSim {
 			weaponLevel2 = Integer.parseInt(weaponLv2);
 		}
 		
-		bsTwoLv = bsLevel2;
-		bsTwoShieldType = shieldType2;
-		bsTwoShieldLevel = shieldLevel2;
-		bsTwoWeaponType = weaponType2;
-		bsTwoWeaponLevel = weaponLevel2;
-		bsTwoHealthMultiplier = bs2Health;
-		bsTwoShieldMultiplier = shield2Health;
+		now.bsOneLv = bsLevel;
+		now.bsOneShieldType = shieldType;
+		now.bsOneShieldLevel = shieldLevel;
+		now.bsOneWeaponType = weaponType;
+		now.bsOneWeaponLevel = weaponLevel;
+		now.bsOneHealthMultiplier = bsHealth;
+		now.bsOneShieldMultiplier = shieldHealth;
+		
+		now.bsTwoLv = bsLevel2;
+		now.bsTwoShieldType = shieldType2;
+		now.bsTwoShieldLevel = shieldLevel2;
+		now.bsTwoWeaponType = weaponType2;
+		now.bsTwoWeaponLevel = weaponLevel2;
+		now.bsTwoHealthMultiplier = bs2Health;
+		now.bsTwoShieldMultiplier = shield2Health;
 		
 		
 	}
