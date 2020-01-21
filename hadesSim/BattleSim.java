@@ -5,8 +5,8 @@ public class BattleSim {
 
 	private String shipStats;
 	
-	private Battleship ship1;
-	private Battleship ship2;
+	private Battleship side1;
+	private Battleship side2;
 	
 	private int bsOneLv;
 	private String bsOneWeaponType;
@@ -14,7 +14,7 @@ public class BattleSim {
 	private String bsOneShieldType;
 	private int bsOneShieldLevel;
 	private double bsOneHealthMultiplier;
-	static double bsOneShieldMultiplier;
+	private double bsOneShieldMultiplier;
 	
 	private int bsTwoLv;
 	private String bsTwoWeaponType;
@@ -26,28 +26,22 @@ public class BattleSim {
 	
 	private boolean rng;
 	
+	static BattleSim now;
+	
 	public BattleSim() {
 		
 	}
 	
 	public static void main(String[] args) {
 		
-		
-		
-		makeShips();
-		
-		Battleship bs1 = new Battleship(bsOneLv, bsOneWeaponType, bsOneWeaponLevel, bsOneShieldType, bsOneShieldLevel);
-		Battleship bs2 = new Battleship(bsTwoLv, bsTwoWeaponType, bsTwoWeaponLevel, bsTwoShieldType, bsTwoShieldLevel);
-	
-		bs1.setWeapon(bs1);
-		bs1.setShield(bs1);
-		bs2.setWeapon(bs2);
-		bs2.setShield(bs2);
+		now.takeUserInput();
+		now.makeShips();
+		now.setRNG();
 		
 		//System.out.println("bs1 stats: " + ((bs1.getHull() * bsOneHealthMultiplier) + (bs1.getShield() * bsOneShieldMultiplier)) + " " + bs1.getWeapon() + " " + bs1.getMaxLaser());
 		//System.out.println("bs2 stats: " + ((bs2.getHull() * bsTwoHealthMultiplier) + (bs2.getShield() * bsTwoShieldMultiplier)) +  " " + bs2.getWeapon() + " " + bs2.getMaxLaser());
 		
-		BattleMath sim = new BattleMath(bs1, bs2);
+		BattleMath sim = new BattleMath(now.getSide1(), now.getSide2());
 
 		sim.doMath();
 		
@@ -73,14 +67,10 @@ public class BattleSim {
 			String init = in.next();
 			init = init.replaceAll("\\s+","");
 			init = init.toUpperCase();
-			shipStats = init;
+			now.shipStats = init;
 		
 			try {
-				makeShips();
-				@SuppressWarnings("unused")
-				Battleship bs1 = new Battleship(bsOneLv, bsOneWeaponType, bsOneWeaponLevel, bsOneShieldType, bsOneShieldLevel);
-				@SuppressWarnings("unused")
-				Battleship bs2 = new Battleship(bsTwoLv, bsTwoWeaponType, bsTwoWeaponLevel, bsTwoShieldType, bsTwoShieldLevel);
+				now.makeShips();
 			}
 			catch(Exception e) {
 				System.out.println("Incorrect input! Try Again!");
@@ -107,9 +97,7 @@ public class BattleSim {
 		
 	}
 	
-	static void makeShips() {
-		
-		BattleSim now = new BattleSim();
+	private void makeShips() {
 		
 		// example input BS6:OMG5:LAS5VBS5:PAS3:BAT5
 		// second input BS6@95:DLT4:BAT10VBS4@50:PAS10:LAS7
@@ -175,7 +163,7 @@ public class BattleSim {
 		shieldHealth = Integer.parseInt(shieldHP) / 100.0;
 		
 		// if input ex. BAT5 uses first bit to pull the level
-		// if input ex. BAT10 uses second bit to pull level ------------stopped editing here
+		// if input ex. BAT10 uses second bit to pull level
 		if(weapon1.length() == 4) {
 			String wlv = weapon1.substring(3,4);
 			weaponLevel = Integer.parseInt(wlv);
@@ -187,15 +175,24 @@ public class BattleSim {
 		}	
 		
 		
-		// determine ship 2 attributes
+		// determine ship 2 attributes uses same logic as ship 1 values
 		String[] ship2 = s2.split(delim2);
 		
 		String bs2 = ship2[0];
 		String lv2 = bs2.substring(2,3);
 		int bsLevel2 = Integer.parseInt(lv2);
-		
 		double bs2Health = 0;
 		String bs2HP = "100";
+		
+		String shield2 = ship2[1];
+		String shieldType2 = shield2.substring(0,3);
+		int shieldLevel2 = 1;
+		int weaponLevel2 = 1;
+		double shield2Health = 0;
+		String shield2HP = "100";
+		
+		String weapon2 = ship2[2];
+		String weaponType2 = weapon2.substring(0,3);
 		
 		if(bs2.contains("@") == false) {
 			bs2Health = 100;
@@ -203,11 +200,6 @@ public class BattleSim {
 			bs2HP = bs2.substring((bs2.indexOf('@') + 1), bs2.length());
 		}
 		bs2Health = Integer.parseInt(bs2HP) / 100.0;
-		
-		String shield2 = ship2[1];
-		String shieldType2 = shield2.substring(0,3);
-		int shieldLevel2 = 1;
-		int weaponLevel2 = 1;
 		
 		if(shield2.length() == 4) {
 			String shlv2 = shield2.substring(3,4);
@@ -218,10 +210,7 @@ public class BattleSim {
 			String shieldLv2 = shield2.substring(3,5);
 			shieldLevel2 = Integer.parseInt(shieldLv2);
 		}
-		
-		double shield2Health = 0;
-		String shield2HP = "100";
-		
+			
 		if(shield2.contains("@") == false) {
 			shield2Health = 100;
 		} else if(shield2.contains("@")) {
@@ -229,8 +218,6 @@ public class BattleSim {
 		}
 		shield2Health = Integer.parseInt(shield2HP) / 100.0;
 		
-		String weapon2 = ship2[2];
-		String weaponType2 = weapon2.substring(0,3);
 		
 		if(weapon2.length() == 4) {
 			String wlv2 = weapon2.substring(3,4);
@@ -242,6 +229,8 @@ public class BattleSim {
 			weaponLevel2 = Integer.parseInt(weaponLv2);
 		}
 		
+		
+		// setting all the values into memory
 		now.bsOneLv = bsLevel;
 		now.bsOneShieldType = shieldType;
 		now.bsOneShieldLevel = shieldLevel;
@@ -258,8 +247,119 @@ public class BattleSim {
 		now.bsTwoHealthMultiplier = bs2Health;
 		now.bsTwoShieldMultiplier = shield2Health;
 		
+		Battleship firstShip = new Battleship(now.getSide1Lv(), now.getSide1WeaponType(), now.getSide1WeaponLv(), now.getSide1ShieldType(), now.getSide1ShieldLv());
+		Battleship secondShip = new Battleship(now.getSide2Lv(), now.getSide2WeaponType(), now.getSide2WeaponLv(), now.getSide2ShieldType(), now.getSide2ShieldLv());
+	
+		firstShip.setWeapon(firstShip);
+		firstShip.setShield(firstShip);
+		firstShip.setWeapon(firstShip);
+		firstShip.setShield(firstShip);
+		
+		side1 = firstShip;
+		side2 = secondShip;
 		
 	}
 
+	public Battleship getSide1() {
+		
+		return side1;
+		
+	}
+	
+	public Battleship getSide2() {
+		
+		return side2;
+		
+	}
+	
+	public int getSide1Lv() {
+		
+		return bsOneLv;
+		
+	}
+	
+	public int getSide2Lv() {
+		
+		return bsTwoLv;
+		
+	}
+	
+	public int getSide1WeaponLv() {
+		
+		return bsOneWeaponLevel;
+		
+	}
+	
+	public int getSide2WeaponLv() {
+		
+		return bsTwoWeaponLevel;
+		
+	}
+	
+	public int getSide1ShieldLv() {
+		
+		return bsOneShieldLevel;
+		
+	}
+	
+	public int getSide2ShieldLv() {
+	
+		return bsTwoShieldLevel;
+	
+	}
+
+	public String getSide1WeaponType() {
+		
+		return bsOneWeaponType;
+		
+	}
+	
+	public String getSide2WeaponType() {
+		
+		return bsTwoWeaponType;
+		
+	}
+	
+	public String getSide1ShieldType() {
+		
+		return bsOneShieldType;
+		
+	}
+	
+	public String getSide2ShieldType() {
+		
+		return bsTwoShieldType;
+		
+	}
+
+	public double getSide1HealthMultiplier() {
+		
+		return bsOneHealthMultiplier;
+		
+	}
+	
+	public double getSide1ShieldMultiplier() {
+		
+		return bsOneShieldMultiplier;
+		
+	}
+
+	public double getSide2HealthMultiplier() {
+		
+		return bsTwoHealthMultiplier;
+		
+	}
+
+	public double getSide2ShieldMultiplier() {
+		
+		return bsTwoShieldMultiplier;
+		
+	}
+
+	public boolean getRNG() {
+		
+		return rng;
+		
+	}
 	
 }

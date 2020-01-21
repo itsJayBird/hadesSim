@@ -25,8 +25,11 @@ public class BattleMath {
 	}
 
 	public BattleMath(Battleship firstShip, Battleship secondShip) {
-		bsOneHullStr = (firstShip.getHull() * BattleSim.bsOneHealthMultiplier) + 
-						(firstShip.getShield() * BattleSim.bsOneShieldMultiplier);
+		
+		BattleSim now = new BattleSim();
+		
+		bsOneHullStr = (firstShip.getHull() * now.getSide1HealthMultiplier()) + 
+						(firstShip.getShield() * now.getSide1ShieldMultiplier());
 		bsOneWeaponStr = firstShip.getWeapon();
 		bsOneLas = firstShip.getWeaponType();
 		bsOneLaserMax = firstShip.getMaxLaser();
@@ -34,8 +37,8 @@ public class BattleMath {
 		bsOneMirror = firstShip.getReflectDamage();
 		
 		
-		bsTwoHullStr = (secondShip.getHull() * BattleSim.bsTwoHealthMultiplier) +
-						(secondShip.getShield() * BattleSim.bsTwoShieldMultiplier);
+		bsTwoHullStr = (secondShip.getHull() * now.getSide2HealthMultiplier()) +
+						(secondShip.getShield() * now.getSide2ShieldMultiplier());
 		bsTwoWeaponStr = secondShip.getWeapon();
 		bsTwoLas = secondShip.getWeaponType();
 		bsTwoLaserMax = secondShip.getMaxLaser();
@@ -54,6 +57,8 @@ public class BattleMath {
 	}
 	
 	private void battleMath() {
+		
+		BattleSim a = new BattleSim();
 		
 		if(bsOneShield == "MIR" || bsTwoShield == "MIR") {
 			
@@ -76,7 +81,7 @@ public class BattleMath {
 			double bsTwoHull = bsTwoHullStr;
 			
 			
-			if(BattleSim.rng == true) {
+			if(a.getRNG() == true) {
 				if(isHeads() == true) {
 					bsOneHull = bsOneHull - bsTwoWeaponStr;
 					coinIsHeads++;
@@ -116,6 +121,8 @@ public class BattleMath {
 
 	public void battleMathLaser1() {
 
+		BattleSim a = new BattleSim();
+		
 		double lasIncrease = 0;
 		
 		if(bsOneLas == "LAS") {
@@ -150,7 +157,7 @@ public class BattleMath {
 			double bsOneHull = bsOneHullStr;
 			double bsTwoHull = bsTwoHullStr;
 		
-		if(BattleSim.rng == true) {
+		if(a.getRNG() == true) {
 			if(isHeads() == true) {
 				bsOneHull = bsOneHull - bsTwoWeaponStr;
 				coinIsHeads++;
