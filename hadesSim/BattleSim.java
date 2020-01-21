@@ -34,6 +34,9 @@ public class BattleSim {
 	
 	public static void main(String[] args) {
 		
+		BattleSim a = new BattleSim();
+		now = a;
+		
 		now.takeUserInput();
 		now.makeShips();
 		now.setRNG();
