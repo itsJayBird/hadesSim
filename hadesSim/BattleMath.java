@@ -26,7 +26,7 @@ public class BattleMath {
 
 	public BattleMath(Battleship firstShip, Battleship secondShip) {
 		
-		BattleSim now = new BattleSim();
+		UserInput now = new UserInput();
 		
 		bsOneHullStr = (firstShip.getHull() * now.getSide1HealthMultiplier()) + 
 						(firstShip.getShield() * now.getSide1ShieldMultiplier());
@@ -58,7 +58,7 @@ public class BattleMath {
 	
 	private void battleMath() {
 		
-		BattleSim a = new BattleSim();
+		UserInput a = new UserInput();
 		
 		if(bsOneShield == "MIR" || bsTwoShield == "MIR") {
 			
@@ -121,7 +121,7 @@ public class BattleMath {
 
 	public void battleMathLaser1() {
 
-		BattleSim a = new BattleSim();
+		UserInput a = new UserInput();
 		
 		double lasIncrease = 0;
 		
