@@ -54,11 +54,8 @@ public class BattleSim {
 		
 		System.out.println(sim.determineWinner() + " " + sim.determineWinPct() + "% of the time!");
 		
-		if(a.getRNG()) {
-			
-			System.out.println("Side 1 attacks first " + sim.findNumHeads() + "/" + "1000 times!");
-			
-		}
+		if(a.getRNG()) System.out.println("Side 1 attacks first " + sim.findNumHeads() + "/" + "1000 times!");
+		
 		
 	}
 
