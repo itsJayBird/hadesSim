@@ -7,18 +7,14 @@ public class BattleSim {
 	}
 	
 	public static void main(String[] args) {
-		//BattleSim now = new BattleSim();
 		UserInput a = new UserInput();
-		
 		boolean hasError = false;
 		
 		System.out.println("\nInput in form of BSLVL:SHIELDLVL:WEAPONLVL V BSLVL:SHIELDLVL:WEAPONLVL \n");
 		System.out.println("Modify shield or battleship hull using @XX \n");
 		System.out.println("Example:  BS4@75:OMG10:BAT8 V BS5:DLT11%75:LAS9");
 		
-		
-		do {
-			
+		do {			
 			hasError = false;
 			a.takeUserInput();
 			
@@ -28,16 +24,13 @@ public class BattleSim {
 			catch(ArrayIndexOutOfBoundsException e) {
 				System.out.println("Input error, Try again!");
 				hasError = true;
-			}
-			
+			}			
 		}while(hasError == true);
 	
 		a.makeShips();
 		
 		do {
-			
 			hasError = false;
-			
 			try {
 				a.setRNG();
 			}

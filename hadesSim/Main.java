@@ -11,15 +11,11 @@ public class Main {
 		boolean hasError = false;
 		
 		while(again == true){
-			
 			BattleSim.main(args);
-			
 			System.out.println("\nSimulate again? Y/N");
 			
 			do {
-				
 				hasError = false;
-			
 				String input = in.next();
 				input = input.toUpperCase();
 			
@@ -29,10 +25,7 @@ public class Main {
 					System.out.println("Input Error, Try again!");
 					hasError = true;
 				}
-				
 			}while(hasError == true);
-			
 		}
-
 	}
 }

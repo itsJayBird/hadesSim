@@ -24,16 +24,13 @@ public class Battleship {
 		}
 		
 		public void setWeapon(Battleship thisShip) {
-			
 			Peripherals a = new Peripherals();
 			a.setWeapon(thisShip.weaponType, thisShip.weaponLvl);
 			thisShip.weaponStrength = a.getWeaponStr();
 			thisShip.maxLasStr = a.getMaxLaser();
-			
 		}
 		
 		public void setShield(Battleship thisShip) {
-			
 			Peripherals a = new Peripherals();
 			a.setShield(thisShip.shieldType, thisShip.shieldLevel);
 			thisShip.shieldStrength = a.getShieldStr();
@@ -41,61 +38,41 @@ public class Battleship {
 			if(thisShip.shieldType == "MIR") {
 				thisShip.reflectDamage = a.getMirror();
 			}
-			
 		}
 		
-		public void setFinalHull(double hull) {
-			
+		public void setFinalHull(double hull) {			
 			finalHull = hull;
-			
 		}
 		
-		public double getFinalHull() {
-			
-			return finalHull;
-			
+		public double getFinalHull() {			
+			return finalHull;			
 		}
 		
-		public String getWeaponType() {
-			
-			return weaponType;
-			
+		public String getWeaponType() {			
+			return weaponType;			
 		}
 		
-		public String getShieldType() {
-			
-			return shieldType;
-			
+		public String getShieldType() {			
+			return shieldType;			
 		}
 		
-		public int getHull() {
-			
-			return hullStrength;
-			
+		public int getHull() {			
+			return hullStrength;			
 		}
 		
-		public int getShield() {
-			
-			return shieldStrength;
-			
+		public int getShield() {			
+			return shieldStrength;			
 		}
 		
-		public int getWeapon() {
-			
-			return weaponStrength;
-			
+		public int getWeapon() {			
+			return weaponStrength;			
 		}
 		
 		public int getMaxLaser() {
-			
 			return maxLasStr;
-			
 		}
 		
 		public double getReflectDamage() {
-			
 			return reflectDamage;
-			
 		}
-
 }
