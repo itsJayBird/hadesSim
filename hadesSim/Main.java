@@ -1,9 +1,7 @@
 package hadesSim;
-
 import java.util.Scanner;
 
 public class Main {
-
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
@@ -18,7 +16,7 @@ public class Main {
 				hasError = false;
 				String input = in.next();
 				input = input.toUpperCase();
-			
+				
 				if(input.contains("N")) {
 					again = false;
 				} else if(input.contains("Y") == false) {
