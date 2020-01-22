@@ -271,5 +271,4 @@ public class UserInput {
 	public double getHullStr2() {	
 		return bsTwoHull;	
 	}
-	
 }
