@@ -1,7 +1,9 @@
 package hadesSim;
 
 public class Battleship {
-
+	// hull strength will get replaced with finalHull, this could be shortened potentially
+	// replace hullStrength with the finalHull after setting multipliers in the input class
+	// these are the vars that other classes will want to know to function
 	private int hullStrength;
 	private int shieldStrength;
 	private String weaponType;
@@ -9,10 +11,9 @@ public class Battleship {
 	private String shieldType;
 	private int shieldLevel;
 	private int weaponStrength;
-	private int maxLasStr;
-	private double reflectDamage;
+	private int maxLasStr; // value of max laser strength if the ship has laser for math purposes
+	private double reflectDamage; // value of the multiplier used from Mirror shield 
 	private double finalHull;
-
 
 		public Battleship ( int bsLv, String weapon, int weaponLv, String shield, int shieldLv ) {
 			int[] bsHull = { 0, 4200, 5000, 6000, 7500, 9000, 9500 };
@@ -43,35 +44,28 @@ public class Battleship {
 		public void setFinalHull(double hull) {			
 			finalHull = hull;
 		}
-		
+	
 		public double getFinalHull() {			
 			return finalHull;			
 		}
-		
 		public String getWeaponType() {			
 			return weaponType;			
 		}
-		
 		public String getShieldType() {			
 			return shieldType;			
 		}
-		
 		public int getHull() {			
 			return hullStrength;			
 		}
-		
 		public int getShield() {			
 			return shieldStrength;			
 		}
-		
 		public int getWeapon() {			
 			return weaponStrength;			
 		}
-		
 		public int getMaxLaser() {
 			return maxLasStr;
 		}
-		
 		public double getReflectDamage() {
 			return reflectDamage;
 		}
