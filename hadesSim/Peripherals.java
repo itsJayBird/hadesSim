@@ -42,6 +42,7 @@ public class Peripherals {
 										   0.26, 0.28, 0.30, 0.32, 0.34, 0.36 };
 				  shieldStrength = mirrorStrength[shieldLevel];
 				  mirrorReflect = reflectDamage[shieldLevel];
+				break;
 		}
 	}
 	
