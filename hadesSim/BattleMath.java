@@ -19,17 +19,16 @@ public class BattleMath {
 	private int s1Wins;
 	private int s2Wins;
 	private int coinIsHeads;
+	private boolean RNG;
 	
-	public BattleMath() {
+	
+	/*public BattleMath() {
 		
-	}
+	}*/
 
-	public BattleMath(Battleship firstShip, Battleship secondShip) {
+	public BattleMath(Battleship firstShip, Battleship secondShip, boolean rng) {
 		
-		UserInput now = new UserInput();
-		
-		bsOneHullStr = (firstShip.getHull() * now.getSide1HealthMultiplier()) + 
-						(firstShip.getShield() * now.getSide1ShieldMultiplier());
+		bsOneHullStr = firstShip.getFinalHull();
 		bsOneWeaponStr = firstShip.getWeapon();
 		bsOneLas = firstShip.getWeaponType();
 		bsOneLaserMax = firstShip.getMaxLaser();
@@ -37,13 +36,14 @@ public class BattleMath {
 		bsOneMirror = firstShip.getReflectDamage();
 		
 		
-		bsTwoHullStr = (secondShip.getHull() * now.getSide2HealthMultiplier()) +
-						(secondShip.getShield() * now.getSide2ShieldMultiplier());
+		bsTwoHullStr = secondShip.getFinalHull();
 		bsTwoWeaponStr = secondShip.getWeapon();
 		bsTwoLas = secondShip.getWeaponType();
 		bsTwoLaserMax = secondShip.getMaxLaser();
 		bsTwoShield = secondShip.getShieldType();
 		bsTwoMirror = secondShip.getReflectDamage();
+		
+		RNG = rng;
 	}
 	
 	public void doMath() {
@@ -57,8 +57,7 @@ public class BattleMath {
 	}
 	
 	private void battleMath() {
-		
-		UserInput a = new UserInput();
+		//UserInput a = new UserInput();
 		
 		if(bsOneShield == "MIR" || bsTwoShield == "MIR") {
 			
@@ -81,12 +80,12 @@ public class BattleMath {
 			double bsTwoHull = bsTwoHullStr;
 			
 			
-			if(a.getRNG() == true) {
+			if(RNG == true) {
 				if(isHeads() == true) {
 					bsOneHull = bsOneHull - bsTwoWeaponStr;
-					coinIsHeads++;
 				} else {
 					bsTwoHull = bsTwoHull - bsOneWeaponStr;
+					coinIsHeads++;
 				}
 			}
 			
@@ -121,7 +120,7 @@ public class BattleMath {
 
 	public void battleMathLaser1() {
 
-		UserInput a = new UserInput();
+		//UserInput a = new UserInput();
 		
 		double lasIncrease = 0;
 		
@@ -157,7 +156,7 @@ public class BattleMath {
 			double bsOneHull = bsOneHullStr;
 			double bsTwoHull = bsTwoHullStr;
 		
-		if(a.getRNG() == true) {
+		if(RNG == true) {
 			if(isHeads() == true) {
 				bsOneHull = bsOneHull - bsTwoWeaponStr;
 				coinIsHeads++;

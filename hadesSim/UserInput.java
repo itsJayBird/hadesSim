@@ -17,6 +17,7 @@ public class UserInput {
 	private int bsOneShieldLevel;
 	private double bsOneHealthMultiplier;
 	private double bsOneShieldMultiplier;
+	private double bsOneHull;
 	
 	private int bsTwoLv;
 	private String bsTwoWeaponType;
@@ -25,18 +26,17 @@ public class UserInput {
 	private int bsTwoShieldLevel;
 	private double bsTwoHealthMultiplier;
 	private double bsTwoShieldMultiplier;
+	private double bsTwoHull;
 	
 	private boolean rng;
 	
 	
 	public void takeUserInput() {
 		
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		in.useDelimiter("\n");
-		
-		System.out.println("  Weapons   |   Shields");
-		System.out.println(" Batt - bat | Omega   - omg \n Las  - las | Passive - pas \n Mass - mas | Delta   - dlt \n            | Mirror  - mir");
-		System.out.println("ex: lv 4 bs with omega 4 and batt 5 vs lv 4 bs with delta 3 and laser 6 \n BS4:OMG4:BAT5 V BS4:DLT3:LAS5");
+
 		String init = in.next();
 		init = init.replaceAll("\\s+","");
 		init = init.toUpperCase();
@@ -45,7 +45,7 @@ public class UserInput {
 		
 	}
 	
-	@SuppressWarnings("resource")
+	@SuppressWarnings({ "resource", "null" })
 	public void setRNG() {
 		
 		Scanner in = new Scanner(System.in);
@@ -58,6 +58,8 @@ public class UserInput {
 			rng = true;
 		} else if(randomizer.contains("N")) {
 			rng = false;
+		} else {
+			rng = (Boolean) null;
 		}
 		
 	}
@@ -66,7 +68,6 @@ public class UserInput {
 		
 		// example input BS6:OMG5:LAS5VBS5:PAS3:BAT5
 		// second input BS6@95:DLT4:BAT10VBS4@50:PAS10:LAS7
-		
 		// Separates the two ships
 		String delim1 = "V";
 		String[] a = shipStats.split(delim1);
@@ -135,7 +136,7 @@ public class UserInput {
 		}
 		
 		if(weapon1.length() == 5) {
-			String weaponLv = weapon1.substring(4,5);
+			String weaponLv = weapon1.substring(3,5);
 			weaponLevel = Integer.parseInt(weaponLv);
 		}	
 		
@@ -204,6 +205,7 @@ public class UserInput {
 		bsOneHealthMultiplier = bsHealth;
 		bsOneShieldMultiplier = shieldHealth;
 		
+		
 		bsTwoLv = bsLevel2;
 		bsTwoShieldType = shieldType2;
 		bsTwoShieldLevel = shieldLevel2;
@@ -217,8 +219,14 @@ public class UserInput {
 	
 		firstShip.setWeapon(firstShip);
 		firstShip.setShield(firstShip);
-		firstShip.setWeapon(firstShip);
-		firstShip.setShield(firstShip);
+		secondShip.setWeapon(secondShip);
+		secondShip.setShield(secondShip);
+		
+		bsOneHull = (firstShip.getHull() * bsHealth) + (firstShip.getShield() * shieldHealth);
+		bsTwoHull = (secondShip.getHull() * bs2Health) + (secondShip.getShield() * shield2Health);
+		
+		firstShip.setFinalHull(bsOneHull);
+		secondShip.setFinalHull(bsTwoHull);
 		
 		side1 = firstShip;
 		side2 = secondShip;
@@ -324,6 +332,18 @@ public class UserInput {
 	public boolean getRNG() {
 		
 		return rng;
+		
+	}
+	
+	public double getHullStr1() {
+		
+		return bsOneHull;
+		
+	}
+	
+	public double getHullStr2() {
+		
+		return bsTwoHull;
 		
 	}
 	

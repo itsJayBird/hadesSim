@@ -7,23 +7,60 @@ public class BattleSim {
 	}
 	
 	public static void main(String[] args) {
-		
+		//BattleSim now = new BattleSim();
 		UserInput a = new UserInput();
 		
-		a.takeUserInput();
+		boolean hasError = false;
+		
+		System.out.println("\nInput in form of BSLVL:SHIELDLVL:WEAPONLVL V BSLVL:SHIELDLVL:WEAPONLVL \n");
+		System.out.println("Modify shield or battleship hull using @XX \n");
+		System.out.println("Example:  BS4@75:OMG10:BAT8 V BS5:DLT11%75:LAS9");
+		
+		
+		do {
+			
+			hasError = false;
+			a.takeUserInput();
+			
+			try {
+				a.makeShips();
+			}
+			catch(ArrayIndexOutOfBoundsException e) {
+				System.out.println("Input error, Try again!");
+				hasError = true;
+			}
+			
+		}while(hasError == true);
+	
 		a.makeShips();
-		a.setRNG();
 		
-		//System.out.println("bs1 stats: " + ((bs1.getHull() * bsOneHealthMultiplier) + (bs1.getShield() * bsOneShieldMultiplier)) + " " + bs1.getWeapon() + " " + bs1.getMaxLaser());
-		//System.out.println("bs2 stats: " + ((bs2.getHull() * bsTwoHealthMultiplier) + (bs2.getShield() * bsTwoShieldMultiplier)) +  " " + bs2.getWeapon() + " " + bs2.getMaxLaser());
+		do {
+			
+			hasError = false;
+			
+			try {
+				a.setRNG();
+			}
+			catch(NullPointerException e){
+				System.out.println("Invalid input, Try again!");
+				hasError = true;
+			}
+			
+		}while(hasError == true);
 		
-		BattleMath sim = new BattleMath(a.getSide1(), a.getSide2());
+		BattleMath sim = new BattleMath(a.getSide1(), a.getSide2(), a.getRNG());
 
 		sim.doMath();
 		
 		System.out.println(sim.determineWinner() + " " + sim.determineWinPct() + "% of the time!");
-		System.out.println("Side 1 attacks first " + sim.findNumHeads() + "/" + "1000 times!");
+		
+		if(a.getRNG()) {
+			
+			System.out.println("Side 1 attacks first " + sim.findNumHeads() + "/" + "1000 times!");
+			
+		}
 		
 	}
+
 	
 }

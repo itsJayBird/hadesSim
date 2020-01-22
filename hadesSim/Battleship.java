@@ -11,6 +11,7 @@ public class Battleship {
 	private int weaponStrength;
 	private int maxLasStr;
 	private double reflectDamage;
+	private double finalHull;
 
 
 		public Battleship ( int bsLv, String weapon, int weaponLv, String shield, int shieldLv ) {
@@ -40,6 +41,18 @@ public class Battleship {
 			if(thisShip.shieldType == "MIR") {
 				thisShip.reflectDamage = a.getMirror();
 			}
+			
+		}
+		
+		public void setFinalHull(double hull) {
+			
+			finalHull = hull;
+			
+		}
+		
+		public double getFinalHull() {
+			
+			return finalHull;
 			
 		}
 		
