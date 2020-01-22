@@ -19,21 +19,14 @@ public class Main {
 			do {
 				
 				hasError = false;
-				
+			
 				String input = in.next();
 				input = input.toUpperCase();
 			
 				if(input.contains("N")) {
 					again = false;
-				}
-			
-				try {
-					if(input.contains("N") == false && input.contains("Y") == false) {
-						again = (Boolean) null;
-					}
-				}
-				catch(NullPointerException e) {
-					System.out.println("Incorrect input, Try again!\n");
+				} else if(input.contains("Y") == false) {
+					System.out.println("Input Error, Try again!");
 					hasError = true;
 				}
 				
