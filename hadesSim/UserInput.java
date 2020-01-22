@@ -31,9 +31,9 @@ public class UserInput {
 	private boolean rng;
 	
 	
+	@SuppressWarnings("resource")
 	public void takeUserInput() {
 		
-		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		in.useDelimiter("\n");
 
@@ -42,10 +42,9 @@ public class UserInput {
 		init = init.toUpperCase();
 		shipStats = init;
 		
-		
 	}
 	
-	@SuppressWarnings({ "resource", "null" })
+	@SuppressWarnings({ "null", "resource" })
 	public void setRNG() {
 		
 		Scanner in = new Scanner(System.in);
@@ -54,9 +53,9 @@ public class UserInput {
 		String randomizer = in.next();
 		randomizer = randomizer.toUpperCase();
 		
-		if(randomizer.contains("Y")) {
+		if(randomizer.contains("Y")==true) {
 			rng = true;
-		} else if(randomizer.contains("N")) {
+		} else if(randomizer.contains("N")==true) {
 			rng = false;
 		} else {
 			rng = (Boolean) null;

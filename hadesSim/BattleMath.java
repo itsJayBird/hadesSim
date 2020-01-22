@@ -48,7 +48,7 @@ public class BattleMath {
 	
 	public void doMath() {
 		
-		if(bsOneLas == "LAS" || bsTwoLas == "LAS") {
+		if(bsOneLas.contains("LAS") == true || bsTwoLas.contains("LAS") == true) {
 			battleMathLaser1();
 		} else {
 			battleMath();
@@ -59,16 +59,16 @@ public class BattleMath {
 	private void battleMath() {
 		//UserInput a = new UserInput();
 		
-		if(bsOneShield == "MIR" || bsTwoShield == "MIR") {
+		if(bsOneShield.contains("MIR") == true || bsTwoShield.contains("MIR") == true) {
 			
 			bsTwoWeaponStr = (bsTwoWeaponStr + (bsOneWeaponStr * bsTwoMirror));
 			bsOneWeaponStr = (bsOneWeaponStr + (bsTwoWeaponStr * bsOneMirror));
 			
-		} else if(bsTwoShield == "MIR") {
+		} else if(bsTwoShield.contains("MIR")) {
 			
 			bsTwoWeaponStr = (bsTwoWeaponStr + (bsOneWeaponStr * bsTwoMirror));
 			
-		} else if(bsOneShield == "MIR") {
+		} else if(bsOneShield.contains("MIR")) {
 			
 			bsOneWeaponStr = (bsOneWeaponStr + (bsTwoWeaponStr * bsOneMirror));
 			
@@ -85,7 +85,6 @@ public class BattleMath {
 					bsOneHull = bsOneHull - bsTwoWeaponStr;
 				} else {
 					bsTwoHull = bsTwoHull - bsOneWeaponStr;
-					coinIsHeads++;
 				}
 			}
 			
@@ -124,27 +123,27 @@ public class BattleMath {
 		
 		double lasIncrease = 0;
 		
-		if(bsOneLas == "LAS") {
+		if(bsOneLas.contains("LAS") == true) {
 			lasIncrease = (bsOneLaserMax - bsOneWeaponStr) / 45;
 		}
 		
-		if(bsTwoLas == "LAS") {
+		if(bsTwoLas.contains("LAS")) {
 			lasIncrease = (bsTwoLaserMax - bsTwoWeaponStr) / 45;
 		}
 		
-		if(bsOneShield == "MIR" || bsTwoShield == "MIR") {
+		if(bsOneShield.contains("MIR") == true && bsTwoShield.contains("MIR") == true) {
 			
 			bsTwoWeaponStr = (bsTwoWeaponStr + (bsOneWeaponStr * bsTwoMirror));
 			bsOneWeaponStr = (bsOneWeaponStr + (bsTwoWeaponStr * bsOneMirror));
 			bsTwoLaserMax = (bsTwoLaserMax + (bsOneWeaponStr * bsTwoMirror));
 			bsOneLaserMax = (bsOneLaserMax + (bsTwoWeaponStr * bsOneMirror));
 			
-		} else if(bsTwoShield == "MIR") {
+		} else if(bsTwoShield.contains("MIR") == true) {
 			
 			bsTwoWeaponStr = (bsTwoWeaponStr + (bsOneWeaponStr * bsTwoMirror));
 			bsTwoLaserMax = (bsTwoLaserMax + (bsOneWeaponStr * bsTwoMirror));
 			
-		} else if(bsOneShield == "MIR") {
+		} else if(bsOneShield.contains("MIR") == true) {
 			
 			bsOneWeaponStr = (bsOneWeaponStr + (bsTwoWeaponStr * bsOneMirror));
 			bsOneLaserMax = (bsOneLaserMax + (bsTwoWeaponStr * bsOneMirror));
@@ -165,7 +164,7 @@ public class BattleMath {
 			}
 		}
 			
-			if(bsOneLas == "LAS" && bsTwoLas == "LAS") {
+			if(bsOneLas.contains("LAS") == true && bsTwoLas.contains("LAS") == true) {
 			
 				for(int k = 0; k < 30; k++) {
 					bsOneHull = bsOneHull - (bsTwoWeaponStr + (lasIncrease * (k + 1)));
@@ -185,7 +184,7 @@ public class BattleMath {
 				
 			}
 			
-			if(bsOneLas == "LAS") {
+			if(bsOneLas.contains("LAS") == true) {
 				for(int k = 0; k < 30; k++) {
 					bsOneHull = bsOneHull - bsTwoWeaponStr;
 					bsTwoHull = bsTwoHull - (bsOneWeaponStr + (lasIncrease * (k + 1)));
@@ -203,7 +202,7 @@ public class BattleMath {
 				}
 			}
 			
-			if(bsTwoLas == "LAS") {
+			if(bsTwoLas.contains("LAS") == true) {
 				for(int k = 0; k < 30; k++) {
 					bsOneHull = bsOneHull - (bsTwoWeaponStr + (lasIncrease * (k + 1)));
 					bsTwoHull = bsTwoHull - bsOneWeaponStr;

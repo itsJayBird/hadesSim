@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		boolean again = true;
@@ -30,8 +31,6 @@ public class Main {
 				}
 				
 			}while(hasError == true);
-			
-			in.close();
 			
 		}
 
