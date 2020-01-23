@@ -75,6 +75,9 @@ public class BattleMath {
 		int ship2LaserStep = (ship2.getMaxLaser() - ship2.getWeapon()) / 30;
 		// this series of if statements will determine if both ships have laser first
 		// it then updates the hull values and weapon values for both ships before it moves onto the main battle method
+		// each of these loops 30 times for laser ramp up time, in BLS its 30s
+		// they'll loop so that the laser damage is increased in steps like it would in game, increase by shipLaserStep per loop until
+		// max damage, then it replaces the appropriate ship weapon with laser based on which ship had laser
 		if(ship1.getWeaponType().contains("LAS")==true && ship2.getWeaponType().contains("LAS")==true) {
 			for(int i = 0; i < 31; i++) {
 				if(getRNG()==true) {
