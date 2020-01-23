@@ -76,8 +76,9 @@ public class UserInput {
         String[] ship1 = s1.split(delim2);
         // first chunk of input ex. BS6 OR BS6@50
         String bs1 = ship1[0];
-        String lv = bs1.substring(2,3);
-        int bsLevel = Integer.parseInt(lv);
+        //String lv = bs1.substring(2,3);
+        //int bsLevel = Integer.parseInt(lv);
+        String lv = "";
         double bsHealth = 0;
         String bsHP = "100";
         // building shield string ex. OMG5 OR OMG10, substring pulls first 3 to assign type
@@ -95,9 +96,12 @@ public class UserInput {
         // if input ex. BS6@50 pulls the numbers after @ symbol to determine %hp
         if(bs1.contains("@") == false) {
             bsHealth = 100;
+            lv = bs1.substring(2,bs1.length());
         } else if(bs1.contains("@")) {
             bsHP = bs1.substring((bs1.indexOf('@') + 1), bs1.length());
+            lv = bs1.substring(2, bs1.indexOf('@'));
         }
+        int bsLevel = Integer.parseInt(lv);
         bsHealth = Integer.parseInt(bsHP) / 100.0;
         // if input ex. OMG4 uses first bit of code to take level
         // if input ex. OMG10 uses second bit to take the level
@@ -132,8 +136,9 @@ public class UserInput {
         // determine ship 2 attributes uses same logic as ship 1 values
         String[] ship2 = s2.split(delim2);
         String bs2 = ship2[0];
-        String lv2 = bs2.substring(2,3);
-        int bsLevel2 = Integer.parseInt(lv2);
+        //String lv2 = bs2.substring(2,3);
+        //int bsLevel2 = Integer.parseInt(lv2);
+        String lv2 = "";
         double bs2Health = 0;
         String bs2HP = "100";
         String shield2 = ship2[1];
@@ -147,10 +152,13 @@ public class UserInput {
 
         if(bs2.contains("@") == false) {
             bs2Health = 100;
+            lv2 = bs2.substring(2, bs2.length());
         } else if(bs2.contains("@")) {
             bs2HP = bs2.substring((bs2.indexOf('@') + 1), bs2.length());
+            lv2 = bs2.substring(2, bs2.indexOf('@'));
         }
         bs2Health = Integer.parseInt(bs2HP) / 100.0;
+        int bsLevel2 = Integer.parseInt(lv2);
 
         if(shield2.length() == 4) {
             String shlv2 = shield2.substring(3,4);

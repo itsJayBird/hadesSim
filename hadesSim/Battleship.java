@@ -13,8 +13,8 @@ public class Battleship {
     private double reflectDamage; // value of the multiplier used from Mirror shield 
 
     public Battleship ( int bsLv, String weapon, int weaponLv, String shield, int shieldLv ) {
-        int[] bsHull = { 0, 4200, 5000, 6000, 7500, 9000, 9500 };
-        hullStrength = bsHull[ bsLv ];
+        int[] bsHull = { 4200, 5000, 6000, 7500, 9000, 9500 };
+        hullStrength = bsHull[ bsLv - 1 ];
         weaponType = weapon;
         weaponLvl = weaponLv;
         shieldType = shield;
