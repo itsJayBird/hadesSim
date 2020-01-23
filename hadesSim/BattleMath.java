@@ -81,7 +81,7 @@ public class BattleMath {
 					if(isHeads()==true) {
 						ship1Hull = ship1Hull - ship2.getWeapon() + (ship1LaserStep * i) + (ship1.getWeapon() * getBS2MirrorMult());
 					} else {
-						ship2Hull = ship2Hull - ship1.getWeapon() + (ship2.getWeapon() * getBS1MirrorMult());
+						ship2Hull = ship2Hull - ship1.getWeapon() + (ship2LaserStep * i) + (ship2.getWeapon() * getBS1MirrorMult());
 					}
 					while(ship1Hull >= 0 && ship2Hull >= 0) {
 						ship1Hull = ship1Hull - ship2.getWeapon() + (ship1LaserStep * i) + (ship1.getWeapon() * getBS2MirrorMult());
@@ -115,19 +115,19 @@ public class BattleMath {
 			for(int i = 0; i < 31; i++) {
 				if(getRNG()==true) {
 					if(isHeads()==true) {
-						ship1Hull = ship1Hull - ship2.getWeapon() + (ship1LaserStep * i) + (ship1.getWeapon() * getBS2MirrorMult());
+						ship1Hull = ship1Hull - ship2.getWeapon() + (ship1.getWeapon() * getBS2MirrorMult());
 					} else {
-						ship2Hull = ship2Hull - ship1.getWeapon() + (ship2.getWeapon() * getBS1MirrorMult());
+						ship2Hull = ship2Hull - ship1.getWeapon() + (ship2LaserStep * i) + (ship2.getWeapon() * getBS1MirrorMult());
 					}
 				}
 				while(ship1Hull >= 0 && ship2Hull >= 0) {
-					ship1Hull = ship1Hull - ship2.getWeapon() + (ship1LaserStep * i) + (ship1.getWeapon() * getBS2MirrorMult());
-					ship2Hull = ship2Hull - ship1.getWeapon() + (ship2.getWeapon() * getBS1MirrorMult());
+					ship1Hull = ship1Hull - ship2.getWeapon() + (ship1.getWeapon() * getBS2MirrorMult());
+					ship2Hull = ship2Hull - ship1.getWeapon() + (ship2LaserStep * i) + (ship2.getWeapon() * getBS1MirrorMult());
 				}
 				if(ship1Hull <= 0 || ship2Hull <=0) i = 32;
 			}
-			setBS2WeaponDMG(ship2.getMaxLaser());
-			setBS1WeaponDMG(ship1.getWeapon());
+			setBS2WeaponDMG(ship2.getWeapon());
+			setBS1WeaponDMG(ship1.getMaxLaser());
 		}
 		bs1Hull = ship1Hull; // sets hull after the laser is ramped up
 		bs2Hull = ship2Hull;
