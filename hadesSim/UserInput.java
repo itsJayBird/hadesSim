@@ -229,7 +229,7 @@ public class UserInput {
                                  "BSD:OMG10:BAT8VBS5:DLT11:LAS10" };
         for(int i = 0; i < caseStudies.length; i++) {
             try {
-                testCase.shipStats = caseStudies[i + 1];
+                testCase.shipStats = caseStudies[i];
                 testCase.makeShips();
             }
             catch(ArrayIndexOutOfBoundsException e) {
