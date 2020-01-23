@@ -83,29 +83,28 @@ public class UserInput {
         //int bsLevel = Integer.parseInt(lv);
         String lv = "";
         double bsHealth = 0;
-        String bsHP = "100";
         // building shield string ex. OMG5 OR OMG10, substring pulls first 3 to assign type
         String shield1 = ship1[1];
         String shieldType = shield1.substring(0,3);
         int shieldLevel = 1;
         int weaponLevel = 1;
         double shieldHealth = 0;
-        String shieldHP = "100";
         // building weapon string ex. BAT5 OR BAT10, substring pulls first 3 to assign type
         String weapon1 = ship1[2];
         String weaponType = weapon1.substring(0,3);
-
         // if input ex. BS6 without a health modifier, use first bit to set hp to 100%
         // if input ex. BS6@50 pulls the numbers after @ symbol to determine %hp
         if(bs1.contains("@") == false) {
             bsHealth = 100;
             lv = bs1.substring(2,bs1.length());
         } else if(bs1.contains("@")) {
-            bsHP = bs1.substring((bs1.indexOf('@') + 1), bs1.length());
+            String bsHP = bs1.substring((bs1.indexOf('@') + 1), bs1.length());
+            bsHealth = Integer.parseInt(bsHP);
             lv = bs1.substring(2, bs1.indexOf('@'));
+            if(bsHealth > 100) bsHealth = 100;
         }
         int bsLevel = Integer.parseInt(lv);
-        bsHealth = Integer.parseInt(bsHP) / 100.0;
+        bsHealth = bsHealth / 100.0;
         // if input ex. OMG4 uses first bit of code to take level
         // if input ex. OMG10 uses second bit to take the level
         if(shield1.length() == 4) {
@@ -122,9 +121,11 @@ public class UserInput {
         if(shield1.contains("@") == false) {
             shieldHealth = 100;
         } else if(shield1.contains("@")) {
-            shieldHP = shield1.substring((shield1.indexOf('@') + 1), shield1.length());
+            String shieldHP = shield1.substring((shield1.indexOf('@') + 1), shield1.length());
+            shieldHealth = Integer.parseInt(shieldHP);
+            if(shieldHealth > 100) shieldHealth = 100;
         }
-        shieldHealth = Integer.parseInt(shieldHP) / 100.0;
+        shieldHealth = shieldHealth / 100.0;
 
         // if input ex. BAT5 uses first bit to pull the level
         // if input ex. BAT10 uses second bit to pull level
@@ -143,13 +144,11 @@ public class UserInput {
         //int bsLevel2 = Integer.parseInt(lv2);
         String lv2 = "";
         double bs2Health = 0;
-        String bs2HP = "100";
         String shield2 = ship2[1];
         String shieldType2 = shield2.substring(0,3);
         int shieldLevel2 = 1;
         int weaponLevel2 = 1;
         double shield2Health = 0;
-        String shield2HP = "100";
         String weapon2 = ship2[2];
         String weaponType2 = weapon2.substring(0,3);
 
@@ -157,10 +156,12 @@ public class UserInput {
             bs2Health = 100;
             lv2 = bs2.substring(2, bs2.length());
         } else if(bs2.contains("@")) {
-            bs2HP = bs2.substring((bs2.indexOf('@') + 1), bs2.length());
+            String bs2HP = bs2.substring((bs2.indexOf('@') + 1), bs2.length());
+            bs2Health = Integer.parseInt(bs2HP);
             lv2 = bs2.substring(2, bs2.indexOf('@'));
+            if(bs2Health > 100) bs2Health = 100;
         }
-        bs2Health = Integer.parseInt(bs2HP) / 100.0;
+        bs2Health = bs2Health / 100.0;
         int bsLevel2 = Integer.parseInt(lv2);
 
         if(shield2.length() == 4) {
@@ -175,9 +176,11 @@ public class UserInput {
         if(shield2.contains("@") == false) {
             shield2Health = 100;
         } else if(shield2.contains("@")) {
-            shield2HP = shield2.substring((shield2.indexOf('@') + 1), shield2.length());
+            String shield2HP = shield2.substring((shield2.indexOf('@') + 1), shield2.length());
+            shield2Health = Integer.parseInt(shield2HP);
+            if(shield2Health > 100) shield2Health = 100;
         }
-        shield2Health = Integer.parseInt(shield2HP) / 100.0;
+        shield2Health = shield2Health / 100.0;
 
 
         if(weapon2.length() == 4) {
