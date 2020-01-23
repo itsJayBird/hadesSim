@@ -84,8 +84,8 @@ public class BattleMath {
 						ship2Hull = ship2Hull - ship1.getWeapon() + (ship2.getWeapon() * getBS1MirrorMult());
 					}
 					while(ship1Hull >= 0 && ship2Hull >= 0) {
-						ship1Hull = ship1Hull - ship2.getWeapon() + (ship1LaserStep * (i - 1)) + (ship1.getWeapon() * getBS2MirrorMult());
-						ship2Hull = ship2Hull - ship1.getWeapon() + (ship2LaserStep * (i - 1)) + (ship2.getWeapon() * getBS1MirrorMult());
+						ship1Hull = ship1Hull - ship2.getWeapon() + (ship1LaserStep * i) + (ship1.getWeapon() * getBS2MirrorMult());
+						ship2Hull = ship2Hull - ship1.getWeapon() + (ship2LaserStep * i) + (ship2.getWeapon() * getBS1MirrorMult());
 					}
 				}
 				if(ship1Hull <= 0 || ship2Hull <=0) i = 32; // this bit ends the for loop if one ship dies before laser is ramped up
