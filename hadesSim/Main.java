@@ -7,16 +7,16 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 		boolean again = true;
 		boolean hasError = false;
-		
+
 		while(again == true){
 			BattleSim.main(args);
 			System.out.println("\nSimulate again? Y/N");
-			
+
 			do {
 				hasError = false;
 				String input = in.next();
 				input = input.toUpperCase();
-				
+
 				if(input.contains("N")) {
 					again = false;
 				} else if(input.contains("Y") == false) {
