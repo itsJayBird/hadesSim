@@ -126,8 +126,8 @@ public class BattleMath {
 				}
 				if(ship1Hull <= 0 || ship2Hull <=0) i = 32;
 			}
-			setBS2WeaponDMG(ship2.getWeapon());
-			setBS1WeaponDMG(ship1.getMaxLaser());
+			setBS1WeaponDMG(ship1.getWeapon());
+			setBS2WeaponDMG(ship2.getMaxLaser());
 		}
 		bs1Hull = ship1Hull; // sets hull after the laser is ramped up
 		bs2Hull = ship2Hull;
