@@ -43,6 +43,9 @@ public class UserInput {
         init = init.replaceAll("\\s+","");
         init = init.toUpperCase();
         shipStats = init;
+        if(shipStats.contains("BREAKME")) {
+            testCases();
+        }
     }
 
     @SuppressWarnings({ "null", "resource" })
@@ -110,7 +113,7 @@ public class UserInput {
             shieldLevel = Integer.parseInt(shlv);
         }
         if(shield1.length() == 5) {
-            String shieldLv = shield1.substring(3,5);
+            String shieldLv = shield1.substring(3,shield1.length());
             shieldLevel = Integer.parseInt(shieldLv);
         }
 
@@ -130,7 +133,7 @@ public class UserInput {
             weaponLevel = Integer.parseInt(wlv);
         }
         if(weapon1.length() == 5) {
-            String weaponLv = weapon1.substring(3,5);
+            String weaponLv = weapon1.substring(3,weapon1.length());
             weaponLevel = Integer.parseInt(weaponLv);
         }	
         // determine ship 2 attributes uses same logic as ship 1 values
@@ -164,9 +167,8 @@ public class UserInput {
             String shlv2 = shield2.substring(3,4);
             shieldLevel2 = Integer.parseInt(shlv2);
         }
-
         if(shield2.length() == 5) {
-            String shieldLv2 = shield2.substring(3,5);
+            String shieldLv2 = shield2.substring(3,shield2.length());
             shieldLevel2 = Integer.parseInt(shieldLv2);
         }
 
@@ -182,9 +184,8 @@ public class UserInput {
             String wlv2 = weapon2.substring(3,4);
             weaponLevel2 = Integer.parseInt(wlv2);
         }
-
         if(weapon2.length() == 5) {
-            String weaponLv2 = weapon2.substring(3,5);
+            String weaponLv2 = weapon2.substring(3,weapon2.length());
             weaponLevel2 = Integer.parseInt(weaponLv2);
         }
 
@@ -222,6 +223,27 @@ public class UserInput {
         side2 = secondShip;	
     }
 
+    private void testCases() {
+        UserInput testCase = new UserInput();
+        String[] caseStudies = { "BS4@75:OMG10:BAT8VBS5:DLT11%75:LAS9", 
+                                 "BSD:OMG10:BAT8VBS5:DLT11:LAS10" };
+        for(int i = 0; i < caseStudies.length; i++) {
+            try {
+                testCase.shipStats = caseStudies[i + 1];
+                testCase.makeShips();
+            }
+            catch(ArrayIndexOutOfBoundsException e) {
+                System.out.println("Case #" + i + " gave error!");
+            }   
+            catch(NumberFormatException e) {
+                System.out.println("Case #" + i + " gave error!");
+            }
+            catch(NullPointerException e) {
+                System.out.println("Case #" + i + " gave error!");
+            }
+        }
+    }
+    
     public Battleship getSide1() {	
         return side1;
     }
