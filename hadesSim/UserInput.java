@@ -101,7 +101,7 @@ public class UserInput {
             String bsHP = bs1.substring((bs1.indexOf('@') + 1), bs1.length());
             bsHealth = Integer.parseInt(bsHP);
             lv = bs1.substring(2, bs1.indexOf('@'));
-            if(bsHealth > 100) bsHealth = 100;
+            if(bsHealth > 100) bsHealth = 100; // this bit here will default % to 100 if something higher is input
         }
         int bsLevel = Integer.parseInt(lv);
         bsHealth = bsHealth / 100.0;
@@ -123,7 +123,7 @@ public class UserInput {
         } else if(shield1.contains("@")) {
             String shieldHP = shield1.substring((shield1.indexOf('@') + 1), shield1.length());
             shieldHealth = Integer.parseInt(shieldHP);
-            if(shieldHealth > 100) shieldHealth = 100;
+            if(shieldHealth > 100) shieldHealth = 100; // this bit defaults to 100% if inputted higher than that as well
         }
         shieldHealth = shieldHealth / 100.0;
 
