@@ -92,8 +92,6 @@ public class BattleMath {
 			}
 			setBS1WeaponDMG(ship1.getMaxLaser()); // setting weapons
 			setBS2WeaponDMG(ship2.getMaxLaser()); 
-			bs1Hull = ship1Hull; // setting hull
-			bs2Hull = ship2Hull;
 		}
 		if(ship1.getWeaponType().contains("LAS")) {
 			for(int i = 0; i < 31; i++) {
@@ -116,8 +114,6 @@ public class BattleMath {
 			}
 			setBS1WeaponDMG(ship1.getMaxLaser());
 			setBS2WeaponDMG(ship2.getWeapon());
-			bs1Hull = ship1Hull;
-			bs2Hull = ship2Hull;
 		}
 		if(ship2.getWeaponType().contains("LAS")) {
 			for(int i = 0; i < 31; i++) {
@@ -138,9 +134,9 @@ public class BattleMath {
 			}
 			setBS2WeaponDMG(ship2.getMaxLaser());
 			setBS1WeaponDMG(ship1.getWeapon());
-			bs1Hull = ship1Hull;
-			bs2Hull = ship2Hull;
 		}
+		bs1Hull = ship1Hull; // sets hull after the laser is ramped up
+		bs2Hull = ship2Hull;
 	}
 	// coin flipper 50/50 shot at being over or under 0.5 to determine heads/tails
 	private boolean isHeads() {
