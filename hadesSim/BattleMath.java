@@ -95,10 +95,6 @@ public class BattleMath {
 		}
 		if(ship1.getWeaponType().contains("LAS")) {
 			for(int i = 0; i < 31; i++) {
-				ship1Hull = getBS1Hull();
-				ship2Hull = getBS2Hull();
-				bs1Hull = ship1Hull;
-				bs2Hull = ship2Hull;
 				if(getRNG()==true) {
 					if(isHeads()==true) {
 						ship1Hull = ship1Hull - ship2.getWeapon() + (ship1LaserStep * i) + (ship1.getWeapon() * getBS2MirrorMult());
@@ -117,8 +113,6 @@ public class BattleMath {
 		}
 		if(ship2.getWeaponType().contains("LAS")) {
 			for(int i = 0; i < 31; i++) {
-				ship1Hull = getBS1Hull();
-				ship2Hull = getBS2Hull();
 				if(getRNG()==true) {
 					if(isHeads()==true) {
 						ship1Hull = ship1Hull - ship2.getWeapon() + (ship1LaserStep * i) + (ship1.getWeapon() * getBS2MirrorMult());
