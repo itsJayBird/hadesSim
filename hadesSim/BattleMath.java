@@ -76,7 +76,7 @@ public class BattleMath {
 		// this series of if statements will determine if both ships have laser first
 		// it then updates the hull values and weapon values for both ships before it moves onto the main battle method
 		if(ship1.getWeaponType().contains("LAS")==true && ship2.getWeaponType().contains("LAS")==true) {
-			for(int i = 0; i < 30; i++) {
+			for(int i = 0; i < 31; i++) {
 				if(getRNG()==true) {
 					if(isHeads()==true) {
 						ship1Hull = ship1Hull - ship2.getWeapon() + (ship1LaserStep * i) + (ship1.getWeapon() * getBS2MirrorMult());
